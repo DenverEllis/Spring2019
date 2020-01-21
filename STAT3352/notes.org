@@ -1,0 +1,93 @@
+
+
+* 20190121
+** Syllabus
+*** Course Work
+- Chapter 1: How we describe data
+- Chapter 2, 3, 4: Background
+- Chapter 6 - 12: Data Analysis
+*** Points
+- 3 exams (100pts each)
+- Homework and Attendance (100 points total)
+- Bonus points for the following:
+  - Having your solution chosen as the distributed solution
+  - Answering the In-Class Bonus Question
+- Your final grade can replace your lowest exam grade
+*** Misc
+- We will use the ~R-project~ in this class
+
+** Describing Data
+- Researcher 1:
+  - Question 1: For all _middle school students_, does attendance improve final grade?
+  - Question 2: Do _male students_ have a significantly higher grade than female students?
+  - Question 3: Are there any racial desparities among _all students_ graded
+
+*** *How do we answer these research questions?*
+- Question --> Collect Data --> Data Analysis --> Draw Conclussion
+
+*** How do we collect Data?
+- By random samples!
+  - For example, pick 500 *random* samples to collect data from
+
+*** Data Analysis
+- Find variables to be studied. In this case, we want to observe the final grade in all questions.
+- Demographics are to be observed, so we also want to track Gender and Race
+- We also want to see the attendance
+- All data sets have a unique ID making 5 columns of data for this set.
+
+Example Below:
+
+|  ID | Race | Gender | Final Grade | Attendance |
+|-----+------+--------+-------------+------------|
+|   1 | W    | M      |          80 |         20 |
+|   2 | W    | F      |          85 |         14 |
+|   3 | B    | M      |          70 |         15 |
+|   4 | B    | M      |          .. |         .. |
+|   5 | H    | F      |          .. |         .. |
+|  .. | A    | M      |          .. |         .. |
+| 500 | ..   | ..     |         100 |         11 |
+
+*** Describing Data (continued)
+To describe and analyze the example data above, we must organize it. Let see how we can do this visually with different kinds of data.
+There are two types of data.
+
+# This is a comment. Visualize the below lists as a tree where Data is the root or the stem
+- Data
+  - Categorical Data (race, gender) (relates to frequencies)
+    - Pie chart
+    - Bar graph
+  - Numerical Data (final grade, attendance)
+    - Basic Statistics
+      - Mean
+      - Median
+      - Variance
+      - Standard Deviation
+      - Mode
+      - Percentile
+    - Plots
+      - Stem and Leaf
+      - Dot Plot
+      - Histogram
+      - Boxplot
+
+*** Data Analysis (continued)
+**** Mean
+Find the mean of set S
+- Sum the elements of S and divide by the number of elements
+\textasciimacron{x} \sum S[i]/S.length()
+**** Median
+Find the median of set S
+- Sort data from low to high
+- If S.length()%2==1 then the median is the middle value
+- If S.length()%2==0 then the median is the average of the middle two values
+**** Mode
+Find the mode of set S
+- The mode is the value that occurs the most option.
+- Count the frequency and return the most frequent number
+- Possible that data has more than one mode when the highest frequency occurs twice
+**** Dot Plot
+- Draw a number line.
+- For each occurence in a set place a dot on top of the number on the line
+- Usefult for observing frequencies
+**** Stem and Leaf Plot
+# Google image for this one, it is weird. Not used often
