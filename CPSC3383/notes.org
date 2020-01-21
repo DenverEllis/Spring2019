@@ -1,0 +1,27 @@
+#+TITLE: Operating Systems Notes
+#+AUTHOR: Denver Ellis
+
+
+* 20190121
+** Welcome!
+** Introduction
+- OS: A core course in any CPSC curriculum
+- Other core courses are...
+  - Programming
+  - Data Structure
+  - Assembly
+  - Computer Organization
+  - Software Engineering
+** What an OS Does
+- A computer system consists of _4 components_:
+  - Hardware
+  - OS
+  - Application Programs
+  - Users
+- OS contacts the Hardware
+- OS is a _resource allocator_ for CPU, memory, file storage, etc.
+- OS is a _control program_ running at all times.
+** Computer System Organization
+- CPU, memory, disk, I/O devices (monitor, printer, keyboard, etc)
+- Storage hierarchy: from register to tapes
+- Cost and access speed
