@@ -1,0 +1,21 @@
+#+TITLE: Artificial Intellignce Notes
+#+AUTHOR: Denver Ellis
+
+* 20200122
+** Introduction
+- She likes nVidia
+- Might use Azure if free
+
+** Artificial Intelligence 501 (Intel)
+- 2015, computers can recognize objects in images better than humans
+- 2016, AI have near human performance on tasks
+*** Definitions (AI vs ML vs DL)
+- *Artificial Intelligence*: A program than can sense, reason, act, and adapt
+  - Artificial Intelligence is a super set of both Machine Learning and Deep Learning
+- *Machine Learning*: Algorithms whose performance improve as they are exposed to more data over time
+  - Machine Learning is a subset of Artificial Intelligence
+  - Two Main Types: *Supervised Learning* and *Unsupervised Learning*
+    - Supervised Learning: Data set has a target column and has a goal to make predictions
+    - Unsupervised Learning: Dataset does not have a supervised column and has a goal to find a structure in data.
+- *Deep Learning*: Subset of machine learning in which multilayered neural networks learn form vasts amounts of data
+  - Deep Learning is a subset of Machine Learning
