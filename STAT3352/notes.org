@@ -1,6 +1,6 @@
+#+TITLE: Statistics Notes
 
-
-* 20190121
+* 20200121
 ** Syllabus
 *** Course Work
 - Chapter 1: How we describe data
@@ -91,3 +91,68 @@ Find the mode of set S
 - Usefult for observing frequencies
 **** Stem and Leaf Plot
 # Google image for this one, it is weird. Not used often
+* 20200123
+- frequency table
+- Relative frequency: divide the frequency of each sample by the sample size
+** Data Analysis (continued)
+*** Variance
+Equation:
+#+BEGIN_SRC LaTeX
+s_{N - 1} = \sqrt {\frac{1}{{N - 1}}\sum\limits_{i = 1}^N {\left( {x_i - \bar x} \right)^2 } }
+#+END_SRC
+
+In R:
+#+BEGIN_SRC R
+var(DataSet)
+#+END_SRC
+
+*** Standard Deviation
+# Equation
+#+BEGIN_SRC LaTeX
+\sigma = \sqrt {\mu _2 }
+#+END_SRC
+
+In R:
+#+BEGIN_SRC R
+// TBD
+#+END_SRC
+*** Percentile
+- N-Percentile: The point value cut-off the first n percent of data when sorted in ascending order
+
+#+BEGIN_SRC R
+quantile(Dataset, PercentWanted)
+#+END_SRC
+
+** Data Visualization
+*** Histogram
+In R
+#+BEGIN_SRC R
+hist(Dataset)
+#+END_SRC
+
+- Determine the frequency and relative frequency for each class
+
+*** Shapes of Distributions
+- Bell Curve
+- J Shape
+- Reverse J Shaped
+- Right Skewed
+- Left Skewed
+- Bimodal
+- U Shaped
+
+*** Boxplot
+- Sort the set
+- 5 number summary of the set
+  - Minimum
+  - Maximum
+  - Median
+  - Lower fourth
+    - Median of the first half of the data
+  - Upper fourth
+    - Median of the second half of the data
+- Detect Outlier
+  - f_s = UpperFourth - LowerFourth
+  - Any observation farther than (1.5)f_s from the closest fourth is an outlier
+  - Any observation farther than (3.0)f_s from the nearest fourth is an extreme
+  - All other observations are mild
