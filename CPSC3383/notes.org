@@ -2,7 +2,7 @@
 #+AUTHOR: Denver Ellis
 
 
-* 20190121
+* 20200121
 ** Welcome!
 ** Introduction
 - OS: A core course in any CPSC curriculum
@@ -25,3 +25,38 @@
 - CPU, memory, disk, I/O devices (monitor, printer, keyboard, etc)
 - Storage hierarchy: from register to tapes
 - Cost and access speed
+* 20200123
+- Operating System is just a piece of software, not hardware. A software package.
+- "Paging Fault"
+** Cache
+- Note that "cache" has two meanings: as a principle or as a dedicated piece of hardware
+- Instruction cache; data cache
+- Data transfer from cache to CPU and registers is usually a hardware function
+- Multiprocessor: cache coherency
+- Not in OS Context
+- Replacement policy in Ch.10
+** Cachng
+- Important principle, perormed at many levels in computer (in hardware, operating system, software)
+- Information in use copied from slower to faster storage temporarily
+- Faster storage (cache) checked first to determine if nformation is there
+  - If it is, information used directly from the cache (fast)
+  - If not, data copied to cache and used there
+** OS Functionalities and Structure
+- *Multi-programming*: Several jobs are kept in main memory at the same time, and the CPU is _multiplexed_ among them.
+- Time Division Multiplexer
+- When Job 1 needs I/O, it quits CPU. Job 2 gets in. After Job 1 finishes I/O, it gets in again
+- An _Extension_: Job 1 quits CPU even if it does not need I/O so Job 2 can use CPU sooner. This is called *time-sharing*
+- CPU Scheduler
+- Memory Manager
+- Disk Manager
+- Multi-Processing systems did not prvide for user interaction
+- *Time-Sharing* (aka /multi-tasking/) allows the use to use keyboard or mouse to interact with each program
+- A program loaded into memory and executing is called a *Process*
+- When a process is waiting for typing from the keyboard, the CPU switches run another program
+** I/O Structure
+- A modern general-purpose computer supports diverse external devices (multimedia, etc.)
+- Each device has a *Device Controller* (DC)
+- Typically, a DC has a local buffer and a set of registers
+- Sometimes a DC can support multiple devices, like the /small computer-system interface/ (SCSI) controller
+- To start an I/O operation, the /device driver/ (DD) loads ...
+** The Timer Interrupts
