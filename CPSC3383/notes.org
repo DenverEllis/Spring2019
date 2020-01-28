@@ -60,3 +60,85 @@
 - Sometimes a DC can support multiple devices, like the /small computer-system interface/ (SCSI) controller
 - To start an I/O operation, the /device driver/ (DD) loads ...
 ** The Timer Interrupts
+* 20200128
+** Dual-Mode Opration and System Calls
+- In a modern OS, there are multiple programs to be executed in an interleaving mode
+- Protection is needed between them, especiallt for OS
+- Kernel mode (a.k.a privileged, system, supervisor mode)
+  - Changing the timer is a privileged instruction
+  - Default timer for a program to run is 5 seconds
+- User mode
+- System Call: When the user code needs a service from OS, it must execute a _special instruction_ (/trap/), to inform OS
+- The OS sets up the kernel mode, then runs the required service, then resets the user mode, then returns to the user code
+** Computing Evironments - Virtualization
+- Allows an OS to run applications in another OS
+  - Vast and growing industry
+- *Emulation* used when source CPU type different from target type (i.e. PowerPC to Intel x86)
+  - Generally _slowest_ method
+  - When computer language nnot compiled to native cove- *Interpretation*
+** OS Services
+- Program Execution: System capability to _load_ a program into memory and to _run_ it
+- I/O operations: the user programs cannot execute I/O operations directly. OS must provide some means to perform I/O
+- File-system Manipulations: program capability to read, write, create, and delete files
+- *Communications*: exchange of information between _processes_ executing either on the same computer or on different systems tied together by a network. Implemented via shared /memory/ or /message passing/
+- Error Detection: ensure correct computiing by detecting rrors in the CPU and memory hardware, in I/O devices, or in user programs
+** User-OS Interface
+*** Command-Interpreter System
+- Many commands are given to the operating system by control sttements which deal with:
+  - Process creation and management
+  - I/O handling
+  - secondary-storage management
+  - main-memory management
+  - file-system access
+  - protection
+  - networking
+*** Shell
+- In Unix and Linux, the _shell_ is a program to read and interpret the control statements
+- The shell is both an _interactive command language_ and a _scripting language_
+- With shell scripts, user can control various actions
+- There are two major types of shells
+  - Bourne Shell
+    - Bourne shell (sh)
+    - Bourne-Again shell (bash) (Ubuntu)
+    - Korn shell (ksh)
+  - C Shell (csh) (BSD Unix)
+**** Basic Commands
+- Some basic commands
+  - man
+  - ls
+  - cat
+  - rm
+  - mv
+  - cp
+  - mkdir
+  - rmdir
+  - cd
+  - more
+  - whereis
+  - who
+  - which
+  - date
+  - etc...
+- System administration command
+  - su
+  - sudo
+  - df
+  - mount
+  - df -t ext4
+  - du
+  - du -b
+  - stat ch2
+  - ulimit -c
+  - free
+  - vmstat
+  - ulimit -a (for bash or pdksh)
+  - ps -m
+  - kill -l
+  - top
+  - uptime
+  - w
+  - pppstats (not installed) (ppp)
+  - mailstat (not installed) (procmail)
+*** Graphical User Interfaces (GUI)
+- Windows: 95, 98, NT4, ME, 2000, Vista, XP, 7, 8, 8.1, 10
+- Linux: KDE, Gnome, Mate, Cinnamon, Budgie, LXDE, Xfce,...

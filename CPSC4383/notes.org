@@ -19,3 +19,11 @@
     - Unsupervised Learning: Dataset does not have a supervised column and has a goal to find a structure in data.
 - *Deep Learning*: Subset of machine learning in which multilayered neural networks learn form vasts amounts of data
   - Deep Learning is a subset of Machine Learning
+* 20200127
+** Learning Python
+** Intelligent Agents
+*** Rationality
+- What is rational at a giveen time depends on four things:
+  - *Performance measures*
+  ...
+- Rationality != omniscience
