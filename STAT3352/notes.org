@@ -156,3 +156,46 @@ hist(Dataset)
   - Any observation farther than (1.5)f_s from the closest fourth is an outlier
   - Any observation farther than (3.0)f_s from the nearest fourth is an extreme
   - All other observations are mild
+* 20200128
+** Probability
+_Vocabulary_:
+- *Outcome*: one possible result of a probability
+- Sample Space: List of possible outcomes for a probability
+- Random: Outcomes occur at random if each outcome is equally likely to occur
+- Simple Event: Speific outcome or type of outcome
+- Complementary Events: the events of one outcome happening and that outcome not happening are complimntary; the sum of the ...
+
+** Probability of Simple Events
+*** _Real World Example_:
+Best buy is having an IPOD giveaway. The put all the IPOD shuffles in a bag. Customers may choose an IPOD without looking at the color. Inside the bag are 4 orange, 5 blue, 6 green, and 5 pink IPODS. If Maria choose one IPOD at random, what is the probability she will choose an orange IPOD?
+
+P(orange) = 4/20 = 2/10 = 1/5 or 20%
+
+*** What is _Probability_
+P(event) = num of favorable outcomes/num of possible outcomes
+
+** Set Theory
+- The complement of an event A, denoted by A' is teh set of all outcomes in sample space that are not contined in A.
+- The union of two events A nd B, denoted by A \cup B, and read "A or B" is the event consisting of all outcomes that are either in A or in B or in both events
+- The intersection of two events A and B, denoted by A \cap B and read "A and B", is the event consisting of all outcomes that are in both A and B
+
+*** Rules:
+- P(A) + P(A') = 1
+- P(0) = 0
+  - Null set: 0, Includes no elements
+
+** Choosing
+Literally read "k choose n" or "choose k from n." Two methods to do so: Permutation and Combination
+*** Permutation
+P_k,n : Use if order matters
+
+P_k,n = n!/(n-k)!
+
+factorial(n)/factorial(n-k)
+*** Combination
+# Parenthesis are verticle
+C_k,n or (n k)
+
+C_k,n = n!/(k! * (k-1)!)
+
+choose(5,3) in R
