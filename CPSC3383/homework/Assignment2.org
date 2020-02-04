@@ -1,0 +1,66 @@
+#+TITLE: CPSC 3380: Operating Systems | Assignment 2
+#+AUTHOR: Denver Ellis | T00591699
+#+OPTIONS: toc:nil tex:t
+#+LaTeX_CLASS_OPTIONS: [a4paper]
+#+LaTeX_CLASS: article
+#+LATEX_COMPILER: pdflatex
+
+* Problem 1.1
+** Question
+What are the main purposes of an operating system?
+** Answer
+* Problem 1.6
+** Question
+Consider the various definitions of operating system. Next, consider whether the operating system should include applications such as Web browsers and mail programs. Argue both that it should and that is should not, and support your answers.
+** Answer
+* Problem 1.7
+** Question
+How does the distinction between kernel mode and user mode function as a rudimentary form of protection (security) system?
+** Answer
+* Problem 1.8
+** Question
+Which of the following instructions should be privileged?
+1. Set value of timer
+2. Read the clock
+3. Clear memory
+4. Issue a trap instruction
+5. Turn off interrupts
+6. Modify entries in device-status table
+7. Switch from user to kernel mode
+8. Access I/O devices
+** Answer
+1. [X] Set value of timer
+2. [ ] Read the clock
+3. [X] Clear memory
+4. [ ] Issue a trap instruction
+5. [X]  Turn off interrupts
+6. [ ] Modify entries in device-status table
+7. [X] Switch from user to kernel mode
+8. [ ] Access I/O devices
+* Problem 2.5
+** Question
+What are the main purposes of an operating system?
+** Answer
+* Problem 2.9
+** Question
+What are the main purposes of an operating system?
+** Answer
+* Problem 2.1
+** Question
+What are the main purposes of an operating system?
+** Answer
+* Problem 2.7
+** Question
+What are the main purposes of an operating system?
+** Answer
+* Problem 2.8
+** Question
+What are the main purposes of an operating system?
+** Answer
+* Problem 2.10
+** Question
+What are the main purposes of an operating system?
+** Answer
+* Question 3
+** Question
+Describe the pros and cons of the micro kernel (MK) architecture of OS

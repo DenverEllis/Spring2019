@@ -142,3 +142,132 @@
 *** Graphical User Interfaces (GUI)
 - Windows: 95, 98, NT4, ME, 2000, Vista, XP, 7, 8, 8.1, 10
 - Linux: KDE, Gnome, Mate, Cinnamon, Budgie, LXDE, Xfce,...
+* 20200130
+** Systems Calls (Sec 2.3)
+- System calls provide the interface between an application process and the OS
+  - In essence, available as assembly-language instruction
+  - Some languages (e.g. C, C++) replace the assembly language part and allow to make system calls directly
+
+** Example: Copy file to another file
+- Acquire the name of the source file
+- Acquire the name of the target file
+- Open the source file (exist or not?)
+- Create the target file (exist or not?)
+- Loop line by line
+- Close both files
+- Send a message to the screen
+
+** Types of System Calls
+- Correspond to the main components of OS: the scheduler, file system, I/O system, and memory management
+  - Process control
+    - End, abort
+    - Create, terminate
+    - Set or get parameters
+    - Suspend, resume
+    - Allocate and release memore
+  - File management
+  - Device management
+  - Information maintenance
+  - Communications
+
+** OS Structures (Sec 2.8)
+- Simple Structure
+  - MS-DOS
+
+*** Layered Approach
+- The OS is divided into layers ...
+
+**** Disadvantages
+- Too much overhead caused by multiple interfaces
+- Similar problem in large companies in industry
+- Flat tree: one president with many vice presidents (VPs)
+- Effectiveness with soft-ware engineering
+
+*** Micro-Kernels
+- UNIX became very large and difficult to manage
+- In the mid-1980s, the _Mach_(Ma:k) project adopted the MK approach
+- Removed all nonessential components from the kernel
+- Implement them as system level and user level programs
+
+**** The MK Contains
+- Process management
+- Memory management
+- Communication facilities between the clients and services, both in use space
+  - Method: Message passing (or shared memory... chapter 3)
+- Example: if a client program wants to access a file, it indirectl interacts with the ile server, through the MK
+
+**** Advantages of MK
+- Easy to extend the OS
+  - All new services are added to user space
+  - No need to modify the kernel
+- Easy to port to new hardware architectures
+- More security and reliability
+  - New services are not put into the kernel
+
+**** MK in Modern Operating Systems
+- Tru64 UNIX (formerly Digital UNIX): Mach kernel with Unix interface
+- QNX real-time OS
+  - The MK provides process scheduling, message passing, hardware interrupts, low-level net communication
+  - All other services are implemented with user processes
+- Mac OS X: Mach kernel; BSD kernel; application can directly talk to kernels
+- Windows NT first used in MK; then (NT4) moved many programs frm user space to kernel space
+- Windows 2000 (NT5)  is based on MK
+  - Professional; Server; Advanced Server; Data-center Server (32 CPUs and 64 GB RAM)
+- Windows XP: More monolithic
+- Linux
+- Trend of OS structures
+
+**** Modules
+- Like a star network wwith a /core kernel/
+- Any module can call any other module
+- Dynamically loadable in boot time or running time
+- A homework for _Linux modules_ will be given later
+* 20200204
+** Process Concept
+- A /process/ is _a computer program in execution_
+  - /"Execution"/ does *not* necessarily mean /"running"/
+- A basic feature: the execution must progress in a _sequential_ fashion
+
+** Process States
+- As a process /executes/, there are several /states/:
+  - *New*: The process is being created
+  - *Ready*: The process is waiting for the CPU
+  - *Running*: Instructions are being executed
+  - *Waiting*: The process is waiting for something to occur
+  - *Terminated*: The process has finished execution
+
+** Memory ...
+- Memory occupation of a process
+  - _Program Counter_: The next instruction to be executed
+  - _Stack_: Temporary data, e.g., function parameters, local variables inside functions
+  - _Data Section_: Global variables
+  - _Text Section_: Instructions, i.e. program code
+  - _Heap_: Dynamic memory
+
+** Process Control Block (PCB)
+- This is a data structure
+- It contains all attributes of a process
+- Examples:
+  - Process state
+  - Program counter
+  - CPU registers
+  - CPU scheduling information
+  - Memory-management information
+  - I/O status information
+
+*** Linux Side:
+In Linux the PCB is: ~struct task_struct~ (about 1k bytes)
+- Hard Coded Part
+#+BEGIN_SRC c
+21931 struct task_struct {
+
+21934 volatile long state;
+/* -1 unrunnable, 0 runnable, >0 stopped */
+#+END_SRC
+- ~volatile~: (ANSI keyword): it tells the compiler that a variable my have its value altered in ways not explicitly defined in the program. E.g., the data can be altered by interrupts or H/W clocks
+- Use ~man gcc~ to see the details
+- Running: The current state of the process
+- ~TASK_RUNNING~: It is running or ready to run
+- ~TASK_INTERRUPTIBLE~ or ~TASK_UNINTERRUPTIBLE~: Waiting for some events. The latter does not accept any signals
+- ~TASK_STOPPED~: Stopped by some singals, or being traced by a tool
+- ~TASK_ZOMBIE~: Terminated but still registered in the /process control table (PCB)

@@ -27,3 +27,4 @@
   - *Performance measures*
   ...
 - Rationality != omniscience
+* 20200129

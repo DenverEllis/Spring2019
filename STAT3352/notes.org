@@ -199,3 +199,32 @@ C_k,n or (n k)
 C_k,n = n!/(k! * (k-1)!)
 
 choose(5,3) in R
+* 20200130
+** Probability
+\# of favorable outcomes/ num of total outcomes
+*** Rules
+- Key words (both, either, or, at, least, at most, not, etc)
+- P(null) = 0
+- P(S) = 1
+- P(A \cup B) = P(A) + P(B) - P(A \cap B)
+*** Counting Techniques
+**** Combination
+**** Permutation
+**** Product Rule
+
+**** Example 4 (product rule)
+There are 100 balls, 40 Red, 60 green, randomly choos 5 balls. Find the probability that 2 red and 3 green are chosen
+
+P(2R3G) = choose(40,2) * choose(60,3) / choose(100, 5) = 0.355
+
+** Conditional Probability
+- Uses notation P(A|B)
+- P(A|B) = P(A AND B)/ P(B)
+  - also... P(A|B) = P(A \cap B)/P(B)
+
+*** Bayes' Therem
+*** Independence
+- Two events A and B are independent if P(A|B)=P(A) and dependent otherwise
+- If A and B are independent then A' and B' are independent. A' and B are indpendent as well
+  - A, B are independent iff P(A|B)=P(A)
+  - A, B are independent iff P(A \cap B)=P(A) P(B)
