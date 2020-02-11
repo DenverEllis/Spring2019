@@ -1,0 +1,53 @@
+#+TITLE: Intro To Proofs Notes
+#+AUTHOR: Denver Ellis
+
+* 20200122
+- This is a flip based class. A lot of work outside of class.
+- Group work during class
+- Blackboard is critical
+** Notes Layout
+- Title of the Notes
+- Unit Number
+- Learning Objectives
+- Notes
+- Annotation of Notes to the Right hand side
+- Couple sentances at the end of what you learned.
+* Unit 2.1 Functions as Relation
+** Learning Objectives:
+1. Know the definition of a function
+2. Know how to show a relation is not a function
+3. Know how to show two functions are equal
+4. Learn some common functions used by mathematicians
+
+** Definition of a function
+In algebra and calculus we were taught that a function was a rule of correspondence between two variables. For example f(x) = x^2 can be represented by y = x^2. The set of ordered pairs (x, x^2) describes the function. So, a function is a type of relation from one set to another. However, not every relation is a function.
+
+*** Function (or Mapping)
+A _function_ (or _mapping_) from a set A to a set B is a relation f from A to B such that
+
+1) the domain of f is A (dom(f) = A), and...
+2) if (x,y) \isin f and (x, z) \isin f, then y = z.
+
+we write f:A->B, read as "f is a function from A to B" (or "f maps A to B").
+
+The set B is called the _codomain_ of f. If A=B, then we say f is a function on A.
+
+Suppose that (x,y) \isin f. We write y = f(x). The element y is called the _image of x under f_ (or the value of f at x). The element x is called the _pre-image of y under f_.
+
+The first condition ensures that every element of A is the first coordinate of some pair in f. The second condition means that f is single-valued.
+
+**** Example 1:
+Let A = {1, 2, 3} and B = {4, 5, 6}. Consider the following relations:
+- P = {(1, 4), (2, 5), (3, 6), (2, 6)}.
+- R = {(1, 4), (2, 6), (3, 5)}.
+- S = {(1, 5), (2, 5), (3, 4)}.
+- T = {(1, 4), (3, 6)}.
+
+The relation P and T are not functions. The relations R and S are functions. Since R(2) = 6 the the image of 2 under R is 6, the pre-image of 6 under R is 2.
+
+For R and S in example 1, the domain is A while the codomain is B. Since:
+    Rng(f) = {b \isin B: \exist a \isin A such that (a, b) \isin f},
+Then Rng(R) = B while Rng(S) = {4,5} \sub B. The codomain of a function f: A->B is any set B such that Rng(f) \sub B.
+
+**** Example 2:
+Prove that g = {(x,y) : x \isin

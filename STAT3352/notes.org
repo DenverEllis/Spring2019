@@ -228,3 +228,63 @@ P(2R3G) = choose(40,2) * choose(60,3) / choose(100, 5) = 0.355
 - If A and B are independent then A' and B' are independent. A' and B are indpendent as well
   - A, B are independent iff P(A|B)=P(A)
   - A, B are independent iff P(A \cap B)=P(A) P(B)
+* 20200204
+** Discrete Random Variable
+1. Determine if a random variable is discrete or continuous
+2. Probability distribution or X
+   1. requirements
+   2. Probability Histogram
+3. Find informtion
+   1. Find mean/expected value for X: U_x = E(X).
+   2. Find variance and standard devition for X:
+      - Variance: \sigma x^2 = var(x)
+      - sd: \sigma x = sd(x)
+   3. Find expected value of function for X
+* 20200206
+** Review
+*** Discrete Random Variable
+- Definition
+- Probability Distribution Table (usually given)
+- probability Histogram for the distribution
+- Mean value [E(x) = \mu_x
+- Variance [var(x) = \sigma^2 x]
+- Standard deviation [sd(x) = \sigma x]
+*** Cumulative Distribution
+- CDF
+*** Sample Questions
+| X | P(X-x) |
+|---+--------|
+| 0 |    0.1 |
+| 1 |    0.1 |
+| 2 |    0.2 |
+| 3 |    0.2 |
+| 4 |    0.4 |
+
+**** A. Find P(2 <= x <= 4)
+P(2 <= x <= 4) = P(2) + P(3) + P(4) = 0.8
+**** B. Find E(x)and Var(x)
+E(\mu_x) = 0.01 + 1*0.1 + 2*0.2 + 3*0.2 + 4*0.4
+Var(\mu_x) (0-\mu_x)^2 * 0.1 + (1-\mu_x)^2 * 0.1 + (2-\mu_x)^2
+**** C. Find E(5x + 6)
+**** D. Find F(3)
+
+** Binomial Distribution
+*** Criteria For Binomial Probability
+An experiment is said to be a binomial experiment provided
+1. Fixed n.
+2. Independent
+3. 2 outcomes
+4. p is fixed
+
+*** Notation
+- There are /n/ independent trials of the experiment
+- Let /p/ denote the probability of success so that /1-p/ is the probabiity of failure
+- Let /x/ denote the number of success in /n/ independent trials of the experiment. So, /0 <= x <= n/
+
+*** Mean, Variance, and Standard Deviation
+- P(x) = choose(n, x)p^x(1-p)^(n-x)
+- \mu_x = E(x) = np
+- \sigma_x^2 = var(x) = np(1-p)
+- \sigma_x = sd(x) = \radic{np(1-p)}
+
+- In R: dbinom(x, n, p)

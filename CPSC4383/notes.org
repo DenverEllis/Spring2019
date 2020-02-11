@@ -28,3 +28,5 @@
   ...
 - Rationality != omniscience
 * 20200129
+* 20200203
+* 20200205

@@ -271,3 +271,62 @@ In Linux the PCB is: ~struct task_struct~ (about 1k bytes)
 - ~TASK_INTERRUPTIBLE~ or ~TASK_UNINTERRUPTIBLE~: Waiting for some events. The latter does not accept any signals
 - ~TASK_STOPPED~: Stopped by some singals, or being traced by a tool
 - ~TASK_ZOMBIE~: Terminated but still registered in the /process control table (PCB)
+* 20200206
+** Operations on Processes
+- Parent process _creates_ child processes, which, in turn create other processes, forming a tree of processes
+- Three modes of resource sharing
+  - Parent and children share _all_ resources.
+  - Children share _subset_ of parent's resources
+  - Parent and child share _no_ resources
+- Two modes of execution:
+  - Parent and children execute _concurrently_
+  - Parent _waits_ until children terminates
+
+** Example: Create a New Process in Unix/Linux
+- Every process must have a parent
+- Traditionally, when creating a new process, Unix _copies_ all stuff of the parent process
+- The user can use _system call_ *fork* to create a new process
+- see an example
+
+#+BEGIN_SRC c++
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+  int childpid;
+
+  if((childpid=fork()) == -1) {
+    perror("can't Fork");
+    exit(1);
+  }
+  else if(childpid == 0) {
+    printf("I am child: child pid = %d,
+            parent pid = %d \n",
+            getpid(), getppid());
+    system("ps f");
+  }
+  else {
+    printf("I am parent: child pid = %d,
+            parent pid = %d\n",
+            childpid, getpid());
+  }
+  sleep(1); exit(0);
+}
+#+END_SRC
+* 20200211
+** Process Termination
+- A process executes its last statement and asks OS to decide it (*exit*)
+  - Output data from child to parent (via *wait*)
+  - Process' resources are de-allocated by OS
+
+- A parent may terminate its children processes (*abort*), because
+  - Child has exceeded allocated resources
+  - Task assigned to child is no longer required
+  - The parent itself is exiting
+    - OS does *not* allow child to continue if its parent terminates
+
+** Inter-procss Communication (IPC)
+- Two methods: /Shared Memory/ (SM) and /Message Passing/ (MP)
+  - Both methods use an /intermediary buffer/ for the shared data
+  - The difference is due to _the buffer's location_: in _kernel's space_ or _user's space_
+  - The SM is usually in the creator's space
