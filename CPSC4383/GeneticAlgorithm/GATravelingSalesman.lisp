@@ -1,9 +1,9 @@
-(ql:quickload :alexandria)
-
 (defparameter *target* (cadr *args*))
 (defparameter *pop-size* (parse-integer (car *args*)))
 
 (defvar population (append '('())))
+(defvar *mutation-rate* 0.001)
+(defvar *crossover-rate* 0.7)
 
 (defparameter *cities* (list
 			'(A 6734 1453)
@@ -61,8 +61,16 @@
 
 (defun generate-random-chromosome (list)
   "Make a chromosome from the list at random. To do this, copy list and shuffle"
-  (alexandria:shuffle (copy-list list)))
+  (loop for i from (length list) downto 2
+        do (rotatef (elt list (random i))
+                    (elt list (1- i))))
+  list)
+
+(defun distance (list)
+
+(defun route-distance (list)
 
 
-(format t (write-to-string  *cities*))
-(format t (write-to-string  (generate-random-chromosome *cities*)))
+(format t (write-to-string (generate-random-chromosome (copy-list *cities*))))
+(format t (write-to-string (generate-random-chromosome (copy-list *cities*))))
+(format t (write-to-string *cities*))
