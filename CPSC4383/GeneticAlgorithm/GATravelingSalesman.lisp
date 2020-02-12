@@ -55,6 +55,13 @@
 			'(AU 5185 3258)
 			'(AV 3023 1942)))
 
+;;Helper Function
+(defun sqr (x)
+  (* x x))
+
+(defun distance (x1 y1 x2 y2)
+  (sqrt (+ (sqr (- x2 x1)) (sqr (- y2 y1)))))
+
 (defun random-item (list)
   "Take a list and return one random item"
   (nth (random (length list)) list))
@@ -66,11 +73,27 @@
                     (elt list (1- i))))
   list)
 
-(defun distance (list)
-
 (defun route-distance (list)
+  (if (not (null (cdr list)))
+      (+ (distance (cadar list)
+		   (caddar list)
+		   (cadadr list)
+		   (car (cddadr list)))
+	 (route-distance (cdr list)))
+     (cadar list)))
 
 
-(format t (write-to-string (generate-random-chromosome (copy-list *cities*))))
-(format t (write-to-string (generate-random-chromosome (copy-list *cities*))))
-(format t (write-to-string *cities*))
+;(format t (write-to-string (generate-random-chromosome (copy-list *cities*))))
+;(format t (write-to-string (generate-random-chromosome (copy-list *cities*))))
+;(format t (write-to-string *cities*))
+(format t (write-to-string (cdar *cities*)))
+(format t (write-to-string (cdadr *cities*)))
+;(format t (write-to-string (distance 0 3 4 0)))
+;(format t (write-to-string (car (cddadr *cities*))))
+
+;(format t (write-to-string (distance (cadar *cities*)
+;				     (caddar *cities*)
+;				     (cadadr *cities*)
+;				     (car (cddadr *cities*)))))
+
+(format t (write-to-string (route-distance *cities*)))
