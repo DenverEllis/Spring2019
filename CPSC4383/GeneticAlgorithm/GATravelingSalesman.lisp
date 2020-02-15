@@ -1,10 +1,16 @@
+;; Note: To scale this to a 3rd or nth dimension, only the distance function
+;;       needs to be modified
+
+;; Take in arguments, will be used later
 (defparameter *target* (cadr *args*))
 (defparameter *pop-size* (parse-integer (car *args*)))
 
-(defvar population (append '('())))
+;; Set globals for mutation and cross-over rate. Allows for easy comparison
+;; of results
 (defvar *mutation-rate* 0.001)
 (defvar *crossover-rate* 0.7)
 
+;; I Intend to change this to read a list of cities from a file later
 (defparameter *cities* (list
 			'(A 6734 1453)
 			'(B 2233 10)
@@ -55,39 +61,122 @@
 			'(AU 5185 3258)
 			'(AV 3023 1942)))
 
-;;Helper Function
+;;Helper function to square a number
 (defun sqr (x)
   (* x x))
 
+;; Helper function to sort rankings from Hi to Lo
+(defun selection-sort (list)
+  (when list
+    (let ((maximum-element (reduce #'max list)))
+      (cons maximum-element
+            (selection-sort (remove maximum-element list))))))
+
+(defun random-item (chromosome)
+  "Take a list and return one random item"
+  (nth (random (length chromosome)) chromosome))
+
+(defun generate-random-chromosome (chromosome)
+  "Make a chromosome from the list at random. To do this, copy list and shuffle"
+  (loop for i from (length chromosome) downto 2
+        do (rotatef (elt chromosome (random i))
+                    (elt chromosome (1- i))))
+  chromosome)
+
 (defun distance (x1 y1 x2 y2)
+  "Find the distance between two cities"
   (sqrt (+ (sqr (- x2 x1)) (sqr (- y2 y1)))))
 
-(defun random-item (list)
-  "Take a list and return one random item"
-  (nth (random (length list)) list))
+(defun route-distance (chromosome)
+  "Find the total distance travelled on a route. This is also the fitness"
+  (if (not (null (cdr chromosome)))
+      (+ (distance (cadar chromosome)
+		   (caddar chromosome)
+		   (cadadr chromosome)
+		   (car (cddadr chromosome)))
+	 (route-distance (cdr chromosome)))
+     (cadar chromosome)))
 
-(defun generate-random-chromosome (list)
-  "Make a chromosome from the list at random. To do this, copy list and shuffle"
-  (loop for i from (length list) downto 2
-        do (rotatef (elt list (random i))
-                    (elt list (1- i))))
-  list)
+(defun mutate-gene (gene chromosome)
+  "Mutate a gene by swapping the positions of a random city with another random city"
+  (if (< (random 1.0) *mutation-rate*)
+      (rotatef gene (random-item chromosome))
+      gene))
 
-(defun route-distance (list)
-  (if (not (null (cdr list)))
-      (+ (distance (cadar list)
-		   (caddar list)
-		   (cadadr list)
-		   (car (cddadr list)))
-	 (route-distance (cdr list)))
-     (cadar list)))
+(defun mutate (chromosome)
+  "Have a chance to mutate every gene in a chromosome"
+  (loop for gene in chromosome
+     collect (mutate-gene gene chromosome)))
 
+(defun pool-fitness (pool)
+  "Return the route distance for each chromosome"
+  (loop for chromosome in pool
+       collect (route-distance chromosome)))
+
+(defun crossover (chromosome1 chromosome2)
+  "Returns a mix of the two chromosomes. Each city is still visited exactly once"
+  (if (< (random 1.0) *crossover-rate*)))
+
+(defun make-probability (fitness)
+  (let ((total-fitness (reduce #'+ fitness))
+	(total-probability 0.0))
+    (append (loop for chromosome in fitness
+	       collect total-probability
+	       do (incf total-probability (/ chromosome total-fitness))) '(1.0))))
+
+(defun assert-probability (pool probability-chart)
+  (let ((ball (random 1.0)))
+    (declare (type float picked))
+    (loop for chromosome in pool
+       for (position next-pos) of-type (float float) on probability-chart
+       if (<= picked next-pos)
+       do (return chromosome))))
+
+(defun repopulate (pool fitness)
+  (let ((probability-chart (make-probability fitness)))
+    (loop for i from 1 to (length pool)
+       collect (mutate (crossover (assert-probability pool probability-chart)
+				  (assert-probability pool probability-chart))))))
+
+(defun create-initial-pool (pool-size chromosome)
+  (loop for i from 1 to pool-size
+     collect (generate-random-chromosome chromosome)))
+
+(defun find-best-chromosome (pool fitness)
+  "Returns the most fit chromosome in the pool"
+  (let ((best-score) (best-chromosome))
+    (loop for chromosome in pool
+       for score in fitness
+       do (when (or (equalp score 0) (not best-score) (> score best-score))
+	    (setf best-score score)
+	    (setf best-chromosome chromosome)))
+    (values best-chromosome best-score)))
+
+(defun display-turn (pool fitness turn)
+  (multiple-value-bind (chromosome score) (find-best-chromosome pool fitness)
+    (let ((avg-fitness (/ (reduce #'+ fitness) (+ 1 (length pool))))
+	  (*print-pretty* nil))
+      (format t "~a - Average Fitness: ~F Best: ~w (fitness ~F)~%" turn avg-fitness chromosome score))))
+
+(defun genetic-algorithm (pop-size chromosome tries)
+  (let ((pool (create-initial-pool pop-size chromosome))
+	(fitness))
+    (loop for i from 1 to tries
+       do (setf fitness (pool-fitness pool goal))
+       do (display-turn pool fitness i)
+       do (setf pool (repopulte pool fitness))
+       finally (return (find-best-chromosome pool fitness)))))
+
+;;; ========================================================================================
+;;; The below commands were called for debugging. Use it for insight into my thought process
+;;; ========================================================================================
 
 ;(format t (write-to-string (generate-random-chromosome (copy-list *cities*))))
 ;(format t (write-to-string (generate-random-chromosome (copy-list *cities*))))
+;(format t (write-to-string (random-item *cities*)))
 ;(format t (write-to-string *cities*))
-(format t (write-to-string (cdar *cities*)))
-(format t (write-to-string (cdadr *cities*)))
+;(format t (write-to-string (cdar *cities*)))
+;(format t (write-to-string (cdadr *cities*)))
 ;(format t (write-to-string (distance 0 3 4 0)))
 ;(format t (write-to-string (car (cddadr *cities*))))
 
@@ -96,4 +185,19 @@
 ;				     (cadadr *cities*)
 ;				     (car (cddadr *cities*)))))
 
-(format t (write-to-string (route-distance *cities*)))
+;(format t (write-to-string *cities*))
+;(format t (write-to-string (car (cddadr *cities*))))
+
+
+;(format t (write-to-string (route-distance *cities*)))
+;(terpri)
+;(format t (write-to-string (route-distance (generate-random-chromosome (copy-list *cities*)))))
+;(terpri)
+;(format t (write-to-string (route-distance (mutate (generate-random-chromosome (copy-list *cities*))))))
+
+;(defvar *pool* (list *cities*
+;		     (generate-random-chromosome (copy-list *cities*))
+;		     (generate-random-chromosome (copy-list *cities*))
+;		     (generate-random-chromosome (copy-list *cities*))
+;		     (generate-random-chromosome (copy-list *cities*))))
+;(format t (write-to-string (selection-sort (pool-fitness *pool*))))

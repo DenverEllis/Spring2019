@@ -1,0 +1,108 @@
+#+TITLE: STAT 3352 Homework Chapter 3
+#+AUTHOR: Denver Ellis
+#+OPTIONS: tex:t
+#+LaTeX_COMPILER: pdflatex
+
+* Problem 1
+** Question
+Each time a component is tested, the trial is a success (S) or failure (F). Suppose the component is tested repeatedly until a success occurs on three consecutive trials. Let Y denote the number of trials necessary to achieve this. List all outcomes corresponding to the five smallest possible values of Y, and state which Y value is associated with each one.
+** Answer
+
+| Y | Combination   |
+|---+---------------|
+| 3 | S S S         |
+|---+---------------|
+| 4 | F S S S       |
+|---+---------------|
+| 5 | F F S S S     |
+|   | S F S S S     |
+|---+---------------|
+| 6 | F F F S S S   |
+|   | S F F S S S   |
+|   | S S F S S S   |
+|   | F S F S S S   |
+|---+---------------|
+| 7 | F F F F S S S |
+|   | S F F F S S S |
+|   | F S F F S S S |
+|   | F F S F S S S |
+|   | S S F F S S S |
+|   | S F S F S S S |
+|   | F S S F S S S |
+|---+---------------|
+* Problem 2
+** Question
+An automobile service facility specializing in engine tune-ups knows that 45% of all tune-ups are done on four cylinder automobiles, 40% on six-cylinder automobiles, and 15% on eight-cylinder automobiles. Let number of cylinders on the next car to be tuned.
+
+1. What is the pmf of X?
+2. Draw probability histogram for the pmf of part (a).
+3. What is the probability that the next car tuned has at least six cylinders? More than six cylinders?
+** Answer
+*** Part A
+| X    |    4 |    6 |    8 |
+|------+------+------+------|
+| P(x) | 0.45 | 0.40 | 0.15 |
+*** Part B
+The plot can be generated from the following R commands:
+#+BEGIN_SRC R
+> DD <- c(4, 6, 8)
+> PP <- c(0.45, 0.40, 0.15)
+> sum(PP)
+[1] 1
+> par(mfrow = c(2, 1))
+> plot(DD, PP, type="h")
+> points(DD,PP,col=2);abline(h=0,col=3)
+> par(mfrow = c(2, 1))
+#+END_SRC
+
+[[./imgs/h3p1.png]]
+*** Part C
+P(X \ge 6) = P(X = 6) + P(X = 8)
+P(X \ge 6) = 0.40 + 0.15 = 0.55
+
+P(X \gt 6) = P(X = 8)
+P(X \gt 6) = 0.15
+* Problem 3
+** Question
+An individual who has automobile insurance from a certain company is randomly selected. Let Y be the number of moving violations for which the individual was cited during the last 3 years. The pmf of Y is:
+
+| y    |  0 |   1 |  2 |   3 |
+|------+----+-----+----+-----|
+| p(y) | .6 | .25 | .1 | .05 |
+
+1. Compute E(Y) and variance of Y.
+2. Suppose an individual with Y violations incurs a surcharge of $100Y2. Calculate the expected amount of the surcharge.
+** Answer
+*** Part A
+To find E(Y) in R:
+#+BEGIN_SRC R
+> DD <- 0:3
+> DD
+[1] 0 1 2 3
+> PP <- c(0.6, 0.25, 0.1, 0.05)
+> sum(PP)
+[1] 1
+> sum(DD*PP)
+[1] 0.6
+> weighted.mean(DD, PP)
+[1] 0.6
+#+END_SRC
+
+And to find the variance
+*** Part B
+* Problem 4
+** Question
+A particular telephone number is used to receive both voice calls and fax messages. Suppose that 25% of the incoming calls involve fax messages, and consider a sample of 25 incoming calls. What is the probability that:
+1. At most 6 of the calls involve a fax message?
+2. Exactly 6 of the calls involve a fax message?
+3. At least 6 of the calls involve a fax message?
+4. More than 6 of the calls involve a fax message?
+5. What is the expected number of calls among the 25 that involve a fax message?
+6. What is the standard deviation of the number among the 25 calls that involve a fax message?
+** Answer
+*** Part A
+*** Part B
+*** Part C
+*** Part D
+*** Part E
+*** Part F

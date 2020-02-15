@@ -1,18 +1,18 @@
 (defparameter *s* (open "./cities.txt"))
 
 (defparameter *cities* (list
-			'(A 6734 1453)
-			'(B 2233 10)
-			'(C 5530 1424)
-			'(D 401 841)
-			'(E 3082 1644)
-			'(F 7608 4458)
-			'(G 7573 3716)
-			'(H 7265 1268)
-			'(I 6898 1885)
-			'(J 1112 2049)
-			'(K 5468 2606)
-			'(L 5989 2873)
+			'(6734 1453)
+			'(2233 10)
+			'(5530 1424)
+			'(401 841)
+			'(3082 1644)
+			'(7608 4458)
+			'(7573 3716)
+			'(7265 1268)
+			'(6898 1885)
+			'(1112 2049)
+			'(5468 2606)
+			'(5989 2873)
 			'(4706 2674)
 			'(4612 2035)
 			'(6347 2683)
@@ -101,4 +101,31 @@
 			'(AU 5185 3258)
 			'(AV 3023 1942)))
 
-(format t (write-to-string (cdr (nth 0 *cities2*))))
+(defparameter *test* (list
+			'((0 (6734 1453))
+			  (1 (2233 10))
+			  (2 (5530 1424))
+			  (3 (401 841))
+			  (4 (3082 1644)))))
+
+(defun generate-random-chromosome (list)
+  "Make a chromosome from the list at random. To do this, copy list and shuffle"
+  (loop for i from (length list) downto 2
+     do (rotatef (elt list (random i))
+		 (elt list (1- i))))
+  list)
+
+
+
+(defun encode-chromosome (list)
+  "Take a list of cities and encode it to a chromosome by indexing"
+  (let ((chromosome
+	(append
+	 (loop for city in list
+	    collect (car city)
+	    do (remove-if #'equal (nth (caar city) list))))))))
+
+
+;; Basically how I want to be able to call the function
+(format t (write-to-string (encode-chromosome (generate-random-chromosome *test*))))
+(format t (write-to-string (*test*)))
