@@ -113,9 +113,56 @@
   (loop for chromosome in pool
        collect (route-distance chromosome)))
 
-(defun crossover (chromosome1 chromosome2)
-  "Returns a mix of the two chromosomes. Each city is still visited exactly once"
-  (if (< (random 1.0) *crossover-rate*)))
+(defun crossover (first second)
+  "Returns a mix of two chromosomes. No change is a valid possibility"
+  (if (< (random 1.0) *crossover-rate*)
+      (let ((point (+ (random (- (length first) 1)) 1)))
+	(append (subseq first 0 point)
+		(subseq second point)))
+    (random-item (list first second))))
+
+
+(defun choose-city (city-list city-name)
+  "Helper function for crossover"
+  (list (position city-name city-list :key #'car :test #'eql)
+        (remove city-name city-list :key #'car :test #'eql)))
+;; when city names are strings use `:test #'string=
+;; (0 2 2 0 0)
+
+(defun encode-chromosome (city-list city-sequence)
+  "Helper function for crossover"
+  (let ((current-cities city-list))
+    (loop for current-city in city-sequence
+          for (idx updated-cities) = (choose-city current-cities current-city)
+          collect (progn (setf current-cities updated-cities)
+                         idx)
+            into index-positions
+          finally (return index-positions))))
+
+;; a tail-call recursive version:
+(defun encode-chromosome (cities city-sequence
+                                   &key (acc-cities '())
+                                        (acc-positions '())
+                                        (pos-counter 0)
+                                        (test #'eql))
+  "Helper function for crossover"
+    (cond ((or (null city-sequence) (null cities)) (nreverse acc-positions))
+          ((funcall test (car city-sequence) (car cities))
+           (encode-chromosome (append (nreverse acc-cities) (cdr cities))
+			      (cdr city-sequence)
+			      :acc-cities '()
+			      :acc-positions (cons pos-counter acc-positions)
+			      :pos-counter 0
+			      :test test))
+          (t (encode-chromosome (cdr cities)
+				city-sequence
+				:acc-cities (cons (car cities) acc-cities)
+				:acc-positions acc-positions
+				:pos-counter (1+ pos-counter)
+				:test test))))
+
+(defun decode-chromosome (chromosome)
+  (remove nil (loop for (
 
 (defun make-probability (fitness)
   (let ((total-fitness (reduce #'+ fitness))
@@ -125,7 +172,7 @@
 	       do (incf total-probability (/ chromosome total-fitness))) '(1.0))))
 
 (defun assert-probability (pool probability-chart)
-  (let ((ball (random 1.0)))
+  (let ((picked (random 1.0)))
     (declare (type float picked))
     (loop for chromosome in pool
        for (position next-pos) of-type (float float) on probability-chart
@@ -135,8 +182,12 @@
 (defun repopulate (pool fitness)
   (let ((probability-chart (make-probability fitness)))
     (loop for i from 1 to (length pool)
-       collect (mutate (crossover (assert-probability pool probability-chart)
-				  (assert-probability pool probability-chart))))))
+	  collect (mutate (crossover (encode-chromosome
+				      (copy-list (assert-probability pool probability-chart))
+				      (copy-list *cities*))
+				     (encode-chromosome
+				      (copy-list (assert-probability pool probability-chart))
+				      (copy-list *cities*)))))))
 
 (defun create-initial-pool (pool-size chromosome)
   (loop for i from 1 to pool-size
@@ -159,13 +210,18 @@
       (format t "~a - Average Fitness: ~F Best: ~w (fitness ~F)~%" turn avg-fitness chromosome score))))
 
 (defun genetic-algorithm (pop-size chromosome tries)
+  "Pass in the initial list of cities as the chromosome"
   (let ((pool (create-initial-pool pop-size chromosome))
 	(fitness))
     (loop for i from 1 to tries
-       do (setf fitness (pool-fitness pool goal))
+       do (setf fitness (pool-fitness pool))
        do (display-turn pool fitness i)
-       do (setf pool (repopulte pool fitness))
+       do (setf pool (repopulate pool fitness))
        finally (return (find-best-chromosome pool fitness)))))
+
+
+(genetic-algorithm 5 (copy-list *cities*) 10)
+
 
 ;;; ========================================================================================
 ;;; The below commands were called for debugging. Use it for insight into my thought process
@@ -200,4 +256,12 @@
 ;		     (generate-random-chromosome (copy-list *cities*))
 ;		     (generate-random-chromosome (copy-list *cities*))
 ;		     (generate-random-chromosome (copy-list *cities*))))
-;(format t (write-to-string (selection-sort (pool-fitness *pool*))))
+
+;(format t (write-to-string (pool-fitness *pool*)))
+;(format t (write-to-string (choose-cities-subsequently (generate-random-chromosome (copy-list *cities*)) *cities*)))
+
+;(loop for city in *pool*
+;      do (format t (write-to-string (choose-cities-subsequently city *cities*))))
+
+
+;(format t (write-to-string (repopulate *pool* (pool-fitness *pool*))))

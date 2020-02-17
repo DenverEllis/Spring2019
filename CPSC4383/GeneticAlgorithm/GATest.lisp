@@ -158,7 +158,7 @@
 		  do (incf total-probability (/ x total-fitness))) '(1.0))))
 
 (defun assert-probability (pool probability-chart)
-  (let ((ball (random 1.0)))
+  (let ((picked (random 1.0)))
     (declare (type float picked))
     (loop for chromosome in pool
 	  for (position next-pos) of-type (float float) on probability-chart
