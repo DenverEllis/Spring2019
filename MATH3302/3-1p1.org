@@ -1,0 +1,102 @@
+#+TITLE: Math 3302 Unit 3.1 Relations Part 1
+#+AUTHOR: Denver Ellis
+# Part 1
+#+BEGIN_SRC latex
+%-------------------------------
+%	ASSIGNMENT CONTENT
+%-------------------------------
+\section{Learning Objectives:}
+\begin{enumerate}
+    \item The concept of a relation from a set $A$ to a set $B$
+    \item The definition of domain and range
+    \item How to use a digraph to visualize a relation
+\end{enumerate}
+
+\section{Relations:}
+\underline{Definition}: Let $A$ and $B$ be sets. A \underline{relation R from $A$ to $B$} is a subset of $A$ x $B$. \\
+
+\begin{addmargin}[2em]{1em}
+A relation from $A$ to $A$ is called a \underline{relation on $A$.} If $(a,b) \epsilon R$, we say that $a$ is \underline{R-Related} (or simply \underline{related}) to $b$ and write $a R b$. If $(a, b) \centernot\varepsilon R$, we write $a \centernot R b$ \\
+\end{addmargin}
+
+\textcolor{magenta}{Ex1: Let $A=\{-1,2,3,4\}$ and $B=\{1,2,3,4,5,6\}$. The set of ordered pairs:
+\begin{addmargin}[2em]{1em}
+$R=\{(-1,5), (2, 4), (2, 1), (4, 2)\}$
+\end{addmargin}
+is a relation from $A$ to $B$ \\
+}
+
+\underline{Definition}: For any set $A$, the identity relation on $A$ is the set
+\begin{addmargin}[2em]{1em}
+$I_A=\{(a, a): a \epsilon A\}.$ \\
+\end{addmargin}
+
+\underline{Definition}: The \underline{domain} of a relation $R$ from $A$ to $B$ is the set
+\begin{addmargin}[2em]{1em}
+$Dom(R)=\{x \epsilon A:$ there exists a $y \epsilon B$ such that $xRy$\}. \\
+\end{addmargin}
+
+\underline{Definition}: The \underline{range} of a relation $R$ is the set
+\begin{addmargin}[2em]{1em}
+$Rng(R)=\{y \epsilon B:$ there exists a $x \epsilon A$ such that $xRy$\}. \\
+\end{addmargin}
+
+Note that the domain is the set of all first coordinates of ordered pairs in $R$ while the range is the set of all second coordinates. Also, we have $Dom(R) \subseteq A$ and $Rng(R) \subseteq B$. \\
+
+\textcolor{magenta}{Ex1 continued: For the relation
+\begin{addmargin}[2em]{1em}
+    $R=\{(-1,5),(2,4),(2,1),(4,2)\}$
+\end{addmargin}
+the domain and range are
+\begin{addmargin}[2em]{1em}
+    $Dom(R)=\{-1,2,4\}$ and $Rng(R) = \{1,2,4,5\}$
+\end{addmargin}
+respectively.}\\
+
+For every set $A$, $Dom(I_A) = Rng(I_A) = A$ since $(a,a) \epsilon I_A$ for all $a \epsilon A$:
+\begin{addmargin}[2em]{1em}
+    Every set of ordered pairs $M$ is a relation.
+\end{addmargin}
+
+
+\section{Visualization of a Relation}
+Sometimes it is impossible to list all the ordered pairs in a relation. In these cases an equation, inequality, expression, or graph can be used to describe the relation.
+
+\textcolor{magenta}{\underline{Ex1 continued}: Again we consider $R=\{(-1,5),(2,4),(2,1),(4,2)\}$ \\
+\includegraphics[scale=0.80]{imgs/Capture.PNG}\\
+\underline{Ex2}: The "less than" relation on $\mathbb{R}$ is the set
+\begin{addmargin}[2em]{1em}
+    $\{(x,y) \epsilon \ \mathbb{R} $x$\mathbb{R} : x < y\}$
+\end{addmargin}
+The domain and range is $\mathbb{R}$.\\ \\
+\underline{Ex3}: Consider the relation $S$ on the set $\mathbb{N}$x$\mathbb{N}$ given by $(m,n)S(k,l)$ if $m+n=k+l$. Since $3+17=12+8$ then $(3,17)S(12,8)$. Since $5+4 \centernot = 6+15$, then $(5,4) \centernot S (6,15_)$. The notation $((3,17),(12,8))\epsilon S$ is cumbersome hence $(3,17)S(12,8)$ is preferred.} \\
+
+The empty set $\centernot 0$ and the set $A$x$B$ are relations from $A$ to $B$. \\
+
+\textcolor{magenta}{\underline{Ex 4:} Let $T=\{(x,y) \epsilon \mathbb{R}$x$\mathbb{R}: x^2 + 4y^2 \leq 16 \}$}
+
+\textcolor{magenta}{\underline{Prove that $Dom(T) = [-4,4]$and $Rng(T) = [-2, 2]$}}
+\textcolor{magenta}{
+\begin{enumerate}
+    \item $Dom(T)=[-4,4]$ \\
+\end{enumerate}}
+\textcolor{red}{Let $x \epsilon Dom(T)$ be fixed but arbitrary. Then there exists a $y \epsilon \mathbb(R)$ such that $xTy$. Hence $x^2 + 4y^2  \leq 16$. Since $4y^2 \geq 0$ then $x^2 \leq 16$. That is $x \epsilon [-4,4]$. Consequently  $Dom(T) \subseteq [-4,4]$.} \\
+
+\textcolor{red}{Now suppose $x \epsilon [-4,4]$. Then $x^2 \leq 16$. Hence $x^2 + 0^2 \leq 16$ and so $xT0$. Therefore  $x \epsilon Dom(T)$. That is $[-4,4] \subseteq Dom(T)$. Thus $Dom(T) = [-4,4]$}
+
+\textcolor{magenta}{
+\begin{enumerate}
+    \setcounter{enumi}{1}
+    \item Rng(T) = [-2, 2]
+\end{enumerate}}
+
+\textcolor{red} {
+    Suppose $y \varepsilon Rng(T)$. Then for some $x$ we have $xTy$. Then $x^2 + 4y^2 \leq 16$. So $4y^2 \leq 16$ or $y^2 \leq 4$. Consequently, $y \varepsilon [-2, 2]$.
+}\\
+
+\textcolor{red}{
+    Now suppose that $y \varepsilon [-2, 2]$. Then $y^2 \leq 4$. In particular $0 + 4y^2 \leq 16$. So $0Ty$. Therefore $y \varepsilon Rng(T).$
+} \\
+
+Sometimes we can use a direct graph (digraph) to represent a relation $R$ on a small set $A$. The elements of $A$ are vertices of the graph. If $(a, b) \varepsilon R$, then we draw an arrow from $a$ to $b$
+#+END_SRC

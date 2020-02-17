@@ -1,0 +1,35 @@
+#+TITLE: Intro To Proofs Notes
+#+AUTHOR: Denver Ellis
+
+#+BEGIN_SRC latex
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+#+END_SRC
+
+* Learning Objectives
+1. How to find the inverse of a relation
+2. How to find the composition of two relations.
+
+* Inverse of a Relation
+** Definition
+Let R be a relation from A to B. (Recall that this means R is a subset of AxB). The inverse of R, denoted by R^-1 is the set:
+
+#+BEGIN_SRC latex
+\begin{addmargin}[2em]{1em}
+$R^-1 = \{(y, x): (x, y) \epsilon R\}$.
+\end{addmargin}
+#+END_SRC
+
+Literally, given a relation R to find R^-1 we just swap the roles of x and y.
+
+*** Example 1:
+Consider the relation R = {(1, b), (1, c), (2, c)}. The inverse relation is R^-1 = {(b, 1), (c, 1), (c, 2)}.
+
+For any set A, the inverse relation of I_A = {(a, a): a \epsilon A} is I_A.
+
+The inverse relation of "less-than," R = {(x, y): x < y} is the "greater than" R^-1 = {(x, y): y < x}.
+
+If a digraph is used to define/visualize a relation, the switching the direction of the arrows defines the inverse relation. Suppose that part of the digraph for some relation is
+
+[[./imgs/img1.PNG]]

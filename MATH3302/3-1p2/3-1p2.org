@@ -1,0 +1,108 @@
+#+TITLE: Intro To Proofs Notes
+#+AUTHOR: Denver Ellis
+
+* Learning Objectives
+1. How to find the inverse of a relation
+2. How to find the composition of two relations.
+
+* Inverse of a Relation
+*** Definition
+Let R be a relation from A to B. (Recall that this means R is a subset of AxB). The inverse of R, denoted by R^-1 is the set:
+
+#+BEGIN_SRC latex
+\begin{addmargin}[2em]{1em}
+$R^-1 = \{(y, x): (x, y) \epsilon R\}$.
+\end{addmargin}
+#+END_SRC
+
+Literally, given a relation R to find R^-1 we just swap the roles of x and y.
+
+*** Example 1:
+Consider the relation R = {(1, b), (1, c), (2, c)}. The inverse relation is R^-1 = {(b, 1), (c, 1), (c, 2)}.
+
+For any set A, the inverse relation of I_A = {(a, a): a \epsilon A} is I_A.
+
+The inverse relation of "less-than," R = {(x, y): x < y} is the "greater than" R^-1 = {(x, y): y < x}.
+
+If a digraph is used to define/visualize a relation, the switching the direction of the arrows defines the inverse relation. Suppose that part of the digraph for some relation is
+
+[[./imgs/img1.PNG]]
+
+Then the inverse relation would include
+
+[[./imgs/img2.PNG]]
+
+in its digraph.
+
+*** Example 2:
+Let T = {(x, y) \epsilon \real x \real: y < 4x^2 - 7}. Find the inverse of T.
+
+_Sketch of proof_:
+
+(x, y) \epsilon T^-1 <=> (y, x) \epsilon T
+            <=> x \lt 4y^2 - 7
+            <=> x + 7 \lt 4y^2
+            <=> 4y^2 \gt x + 7
+            <=> y^2 \gt \frac{x+7}{4}
+            <=> y \gt 1/2 * \radic(x + 7)
+
+Thus T^-1 = {(x, y) \epsilon \real x \real: y \gt 1/2 \radic(x+7)}.
+
+** Theorem 3.1.1:
+Let R be a relation from A to B, Then
+
+1) Dom(R^-1) = Rng(R).
+2) Rng(R^-1) = Dom(R).
+
+*** Proof:
+1. The element b \epsilon Dom(R^-1) iff there exists an a \epsilon A such that (b, a) \epsilon R^-1. We have (b, a) \epsilon R^-1 iff (a, b) \epsilon R. Finally (a, b) \epsilon R iff b \epsilon Rng(R). Thus Dom(R^-1) = Rng(R).
+2. The proof is similar. \qed
+
+*** Definition
+Let R be a relation from A to B and let s be a relation from B to C. The _composite_ or R and S, denoted by S \circ R, is the relation from A to C given by:
+
+S \circ R = {(a, c): There exists a b\epsilon B such that (a, b) \epsilon R _and_ (b, c) \epsilon S}.
+
+Note: S \circ R \sube A x C and while Dom(S \circ R) \sube Dom(R) it is not always true that Dom(S \circ R) = Dom(R).
+
+*** Example 3:
+Let A = {1, 2, 3, 4, 5}, B = {p, q, r, s, t}, and C = {x, y, z, w}. Let R be the relation from A to B
+
+R = {(1, p), (1, q), (2, q), (3, r), (4, s)}
+
+and let S be the relation from B to A
+
+S = {(p, x), (q, x), (q, y), (s, z), (t, z)}.
+
+Find S \circ R.
+
+**** Solution:
+We will use an arrow diagram to find S \circ R.
+
+[[./imgs/img3.PNG]]
+
+S \circ R = {(1, x), (1, y), (2, x), (2, y), (4, z)}. \qedsymbol
+
+suppose that R is a relation from A to B and S is a relation from B to A. In general
+
+S \circ R \ne R \circ S
+A->A.   B->B.
+
+*** Example 4:
+Let R = {(x, y) \epsilon \real x \real: y = x + 1} and S = {(x, y): y = x^2}. Find S \circ R and R \circ S.
+
+**** Solution
+R \circ S = {(x, y): For some z \epsilon \real, (x, z) \epsilon S and (z, y) \epsilon R}
+      = {(x, y): For some z \epsilon \real, z = x^2 and y = z + 1}
+      = {(x, y): y = x^2 + 1}.
+
+S \circ R = {(x, y): For some z \epsilon \real, (x, z) \epsilon R and (z, y) \epsilon S}
+      = {(x, y): For some z \epsilon \real, z = x^2 and y = z + 1}
+      = {(x, y): y = x^2 + 1}. \qedsymbol
+** Theorem 3.1.2:
+Let A, B, C and D be sets. Let R be a relation from A to B, S be a relation from B to C, and T be a relation from C to D. Then
+
+1. (R^-1)^-1 = R
+2. T \circ (S \circ R) = (T \circ S) \circ R
+3. I_B \circ R = R \circ I_A = R
+4. (S \circ R)^-1 = R^-1 \circ S^-1.
