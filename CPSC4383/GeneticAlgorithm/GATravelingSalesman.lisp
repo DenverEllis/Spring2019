@@ -2,8 +2,8 @@
 ;;       needs to be modified
 
 ;; Take in arguments, will be used later
-(defparameter *target* (cadr *args*))
-(defparameter *pop-size* (parse-integer (car *args*)))
+;(defparameter *target* (cadr *args*))
+;(defparameter *pop-size* (parse-integer (car *args*)))
 
 ;; Set globals for mutation and cross-over rate. Allows for easy comparison
 ;; of results
@@ -64,6 +64,10 @@
 ;;Helper function to square a number
 (defun sqr (x)
   (* x x))
+
+;; https://stackoverflow.com/questions/9444885
+(defun remove-nth (n lst)
+    (append (subseq lst 0 (- n 1)) (subseq lst n (length lst))))
 
 ;; Helper function to sort rankings from Hi to Lo
 (defun selection-sort (list)
@@ -135,7 +139,7 @@
           for (idx updated-cities) = (encode-gene current-cities current-city)
           collect (progn (setf current-cities updated-cities)
                          idx)
-            into index-positions
+	  into index-positions
           finally (return index-positions))))
 
 ;; a tail-call recursive version:
@@ -160,19 +164,20 @@
 				:pos-counter (1+ pos-counter)
 				:test test))))
 
-(defun decode-gene (chromosome gene)
+(defun decode-gene (n identity)
   "Helper to decode after crossover"
-  (list (position gene chromosome :key #'car :test #'eql)
-	(remove gene chromosome :key #'car :test #'eql)))
+  (list (nth n identity)
+	(setf identity (remove-nth (+ n 1) identity))))
 
 (defun decode-chromosome (chromosome city-sequence)
-  (let ((current-cities city-list))
-    (loop for current-city in city-sequence
-       for (idx updated-cities) = (decode-gene current-cities current-city)
-       collect (progn (setf current-cities updated-cities)
-		      idx)
-       into index-positions
-       finally (return index-positions))))
+  "Helper function for crossover"
+  (let ((current-genes city-sequence))
+  (loop for current-gene in chromosome
+	for (idx updated-genes) = (decode-gene current-gene current-genes)
+	collect (progn (setf current-genes updated-genes) idx)
+	into decoded-chromosomes
+	finally (format t (write-to-string decoded-chromosomes)))))
+
 
 (defun make-probability (fitness)
   (let ((total-fitness (reduce #'+ fitness))
@@ -277,4 +282,21 @@
 
 
 ;(format t (write-to-string (repopulate *pool* (pool-fitness *pool*))))
-(format t (write-to-string (decode-gene (encode-chromosome (copy-list (generate-random-chromosome (copy-list *cities*))) *cities*) *cities*)))
+
+(setf test (generate-random-chromosome (copy-list *cities*)))
+(setf testE (encode-chromosome test (copy-list *cities*)))
+(setf testD (decode-chromosome (copy-list testE) (copy-list *cities*)))
+
+(terpri) (terpri)
+
+(format t (write-to-string test))
+(terpri)
+(terpri)
+(format t (write-to-string testE))
+(terpri)
+(terpri)
+;(format t (write-to-string testD))
+
+;(format t (write-to-string (decode-chromosome (encode-chromosome (copy-list (generate-random-chromosome (copy-list *cities*))) *cities*) *cities*)))
+
+;(format t (write-to-string (encode-chromosome (copy-list (generate-random-chromosome (copy-list *cities*))) *cities*)))

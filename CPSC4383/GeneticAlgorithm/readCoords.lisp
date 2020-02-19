@@ -101,12 +101,45 @@
 			'(AU 5185 3258)
 			'(AV 3023 1942)))
 
+;; a tail-call recursive version:
+(defun encode-chromosome (cities city-sequence
+                                   &key (acc-cities '())
+                                        (acc-positions '())
+                                        (pos-counter 0)
+                                        (test #'eql))
+  "Helper function for crossover"
+    (cond ((or (null city-sequence) (null cities)) (nreverse acc-positions))
+          ((funcall test (car city-sequence) (car cities))
+           (encode-chromosome (append (nreverse acc-cities) (cdr cities))
+			      (cdr city-sequence)
+			      :acc-cities '()
+			      :acc-positions (cons pos-counter acc-positions)
+			      :pos-counter 0
+			      :test test))
+          (t (encode-chromosome (cdr cities)
+				city-sequence
+				:acc-cities (cons (car cities) acc-cities)
+				:acc-positions acc-positions
+				:pos-counter (1+ pos-counter)
+				:test test))))
+
+
 (defparameter *test* (list
-			'((0 (6734 1453))
-			  (1 (2233 10))
-			  (2 (5530 1424))
-			  (3 (401 841))
-			  (4 (3082 1644)))))
+		      '(A (6734 1453))
+		      '(B (2233 10))
+		      '(C (5530 1424))
+		      '(D (401 841))
+		      '(E (3082 1644))))
+
+(defparameter *test2* (list 0 2 2 0 0))
+
+(defparameter *test3* (list
+		       '(A (6734 1453))
+		       '(D (401 841))
+		       '(E (3082 1644))
+		       '(B (2233 10))
+		       '(C (5530 1424))))
+
 
 (defun generate-random-chromosome (list)
   "Make a chromosome from the list at random. To do this, copy list and shuffle"
@@ -116,16 +149,33 @@
   list)
 
 
+(defun encode-gene (chromosome gene)
+  "Helper function for crossover"
+  (list (position gene chromosome :key #'car :test #'eql)
+        (remove gene chromosome :key #'car :test #'eql)))
+;; when city names are strings use `:test #'string=
+;; (0 2 2 0 0)
 
-(defun encode-chromosome (list)
-  "Take a list of cities and encode it to a chromosome by indexing"
-  (let ((chromosome
-	(append
-	 (loop for city in list
-	    collect (car city)
-	    do (remove-if #'equal (nth (caar city) list))))))))
+(defun encode-chromosome (city-list city-sequence)
+  "Helper function for crossover"
+  (let ((current-cities city-list))
+    (loop for current-city in city-sequence
+          for (idx updated-cities) = (encode-gene current-cities current-city)
+          collect (progn (setf current-cities updated-cities)
+                         idx)
+	  into index-positions
+          finally (return index-positions))))
 
 
-;; Basically how I want to be able to call the function
-(format t (write-to-string (encode-chromosome (generate-random-chromosome *test*))))
-(format t (write-to-string (*test*)))
+(setf test (generate-random-chromosome (copy-list *test*)))
+(setf testE (encode-chromosome (copy-list test) (copy-list *test*)))
+
+(format t (write-to-string test))
+(terpri)
+(terpri)
+(format t (write-to-string testE))
+(terpri)
+(terpri)
+
+(format t (write-to-string (encode-chromosome (copy-list (generate-random-chromosome (copy-list *test*))) *test*)))
+;(format t (write-to-string (encode-chromosome *test3* *test*)))
