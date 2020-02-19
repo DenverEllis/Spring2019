@@ -121,11 +121,10 @@
 		(subseq second point)))
     (random-item (list first second))))
 
-
-(defun choose-city (city-list city-name)
+(defun encode-gene (chromosome gene)
   "Helper function for crossover"
-  (list (position city-name city-list :key #'car :test #'eql)
-        (remove city-name city-list :key #'car :test #'eql)))
+  (list (position gene chromosome :key #'car :test #'eql)
+        (remove gene chromosome :key #'car :test #'eql)))
 ;; when city names are strings use `:test #'string=
 ;; (0 2 2 0 0)
 
@@ -133,7 +132,7 @@
   "Helper function for crossover"
   (let ((current-cities city-list))
     (loop for current-city in city-sequence
-          for (idx updated-cities) = (choose-city current-cities current-city)
+          for (idx updated-cities) = (encode-gene current-cities current-city)
           collect (progn (setf current-cities updated-cities)
                          idx)
             into index-positions
@@ -161,8 +160,19 @@
 				:pos-counter (1+ pos-counter)
 				:test test))))
 
-(defun decode-chromosome (chromosome)
-  (remove nil (loop for (
+(defun decode-gene (chromosome gene)
+  "Helper to decode after crossover"
+  (list (position gene chromosome :key #'car :test #'eql)
+	(remove gene chromosome :key #'car :test #'eql)))
+
+(defun decode-chromosome (chromosome city-sequence)
+  (let ((current-cities city-list))
+    (loop for current-city in city-sequence
+       for (idx updated-cities) = (decode-gene current-cities current-city)
+       collect (progn (setf current-cities updated-cities)
+		      idx)
+       into index-positions
+       finally (return index-positions))))
 
 (defun make-probability (fitness)
   (let ((total-fitness (reduce #'+ fitness))
@@ -220,7 +230,9 @@
        finally (return (find-best-chromosome pool fitness)))))
 
 
-(genetic-algorithm 5 (copy-list *cities*) 10)
+;(genetic-algorithm 5 (copy-list *cities*) 10)
+
+
 
 
 ;;; ========================================================================================
@@ -265,3 +277,4 @@
 
 
 ;(format t (write-to-string (repopulate *pool* (pool-fitness *pool*))))
+(format t (write-to-string (decode-gene (encode-chromosome (copy-list (generate-random-chromosome (copy-list *cities*))) *cities*) *cities*)))

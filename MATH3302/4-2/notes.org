@@ -1,0 +1,82 @@
+* Learning Objectives
+1. The definition of an onto function (surjective function) and how to prove a function is onto
+2. The definition of a one-to-one function (injective function) and how to prove a function is one-to-one.
+* Onto
+** Defintion
+A function f:A->B is _onto_ B (is surjection) if Rng(f) = B. When f is a surjection, we may write f:A->(onto) B.
+
+We know that Rng(f) \sube B. To show that f:A->B is a surjection, we just need to show that B \sube Rng(f). To show that f:A->B is not onto, we just need to ind one b \isin B such that b \not\isin Rng(f).
+
+** Example 1:
+Prove that f: \real -> \real, given by f(x) = x + 2, is onto \real.
+
+*** Proof:
+Let w \isin \real and let t = w - 2. Then t \isin \real and f(t) = t + 2 = w - 2 + 2 =  w. That is w \isin Rng(f). Therefore, f:\real->\real is onto \real.  \qedsymbol
+
+** Example 2:
+Let g:\real->\real be defined by g(x) = x^2 + 1. Then g is not onto \real since there is not x \isin \real s.t. x^2 +1 = 0. Note \forall x\isin\real x^2 + 1 \ge 1 \gt 0..
+
+Let f:\real->B\sube\real. Consider the graph of f. Then:
+
+#+BEGIN_SRC latex
+\begin{addmargin}[2em]{1em}
+  \paragraph{"f maps ont B iff for every b \isin B, the horizontal line y=b intersects the graph of f."
+\end{addmargin}
+#+END_SRC
+
+This is called the _Horizontal Line Test for onto functions_.
+
+** Example 3:
+The mapping M:\mathbb{Z}x\mathbb{Z}->\mathbb{Z}, where M(x, y) = xy, is a surjection onto \mathbb{Z}.
+*** Proof:
+Let z\in\mathbb{Z}. We need to find (x,y)\in\mathbb{Z}x\mathbb{Z} s.t. M(x, y) = z. Let z = 2 and y = 1. Then
+
+#+BEGIN_SRC latex
+\begin{addmargin}[2em]{1em}
+  $M(x, y) = M(2, 1) = 2 * 1 = 2$
+\end{addmargin
+#+END_SRC
+
+Thus z \in Rng(M). Consequently \mathbb{Z}=Rng(M). That is, M is onto. \qedsymbol
+
+** Example 4:
+Let S:(-\infin, 0]->[-4, +\infin) be defined by s(x) = x^2 - 4. Prove that s is onto [-4, +\infin).
+
+*** Proof
+Let x \in [-4, +\infin). Note w + 4 \ge 0. Let x = -\radic(w+4). Then x \in (-\infin, 0] and
+
+#+BEGIN_SRC latex
+\begin{addmargin}[2em]{1em}
+$s(x) = (-\radic{w+4})^2 - 4 = w + 4 - 4 = w$.
+\end{addmargin}
+#+END_SRC
+
+Therefor the function s maps (-\infin, 0] to [-4, +\infin). \qedsymbol
+
+** Theorem 4.3.1:
+Suppose f:A->B is onto B and g:B->C is onto C. Then g \circ f is onto C.
+
+** Theorem 4.3.2:
+Let f:A->B and g:B->C. Suppose g \circ f is onto C. Then g is onto C.
+
+*** Proof:
+Let c \in C. We want to show that there exists a b \in B s.t. g(b) = C. Since g \circ f is onto C, then there exists an a \in A s.t. (g \circ f)(a) = c.
+
+Let b = f(a). Then b \in B and
+
+#+BEGIN_SRC latex
+\begin{addmargin}[2em]{1em}
+$g(b) = g(f(a)) = (g \circ f)(a) = c$.
+\end{addmargin}
+#+END_SRC
+
+Therefore g maps B onto C. \qedsymbol
+
+* One-To-One Functions
+** Definition:
+A function f:A->B is _one-to-one_ (an injection) if whenever f(x) = f(y), then x = y. When f is an injection, we write f:A->(1-1)B.
+
+We can do a diret proof by showing that f(x) = f(y) implies x=y. We can also do a proof by contrapositive (x \ne y => f(x) \ne f(y)).
+
+** Example 5:
+Show that the function f:\real->\real defined by f(x)=2x+1 is one-to-one
