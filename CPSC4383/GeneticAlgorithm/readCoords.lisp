@@ -177,5 +177,5 @@
 (terpri)
 (terpri)
 
-(format t (write-to-string (encode-chromosome (copy-list (generate-random-chromosome (copy-list *test*))) *test*)))
+(format t (write-to-string (encode-chromosome (copy-list (generate-random-chromosome (copy-list *cities2*))) *cities2*)))
 ;(format t (write-to-string (encode-chromosome *test3* *test*)))

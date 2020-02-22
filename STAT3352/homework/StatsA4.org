@@ -1,0 +1,61 @@
+#+TITLE: STAT 3352 Homework Chapter 2
+#+AUTHOR: Denver Ellis
+#+OPTIONS: tex:t
+#+LaTeX_COMPILER: pdflatex
+
+* Problem 1
+** Question
+A college professor never finishes his lecture before the end of the hour and always finishes his lectures within 2 min after the hour. Let X=the time that elapses between the end of the hour and the end of the lecture and suppose the pdf of X is f(x)=kx2 if 0<=x<=2 and 0 otherwise. 
+
+a. Find the value of k and draw the corresponding density curve. [Hint: Total area under the graph of f(x) is 1.]
+b. What is the probability that the lecture ends within 1 min of the end of the hour?
+c. Find mean value and variance of X. 
+** Answer
+*** Part A
+The value of k can be found by 
+1 = \int_0^2 kx^2 dx => k = 3/8
+
+We can draw this with the following R commands:
+
+* Problem 2
+** Question
+** Answer
+* Problem 3
+** Question
+** Answer
+* Problem 4
+** Question
+** Answe
+* Problem 5
+** Question
+** Answer
+* Problem 6
+** Question
+** Answer
+* Problem 7
+** Question
+** Answer
+* Problem 8
+** Question
+** Answer
+* Problem 9
+** Question
+** Answer
+* Problem 10
+** Question
+** Answe
+* Problem 11
+** Question
+** Answer
+* Problem 12
+** Question
+** Answer
+* Problem 13
+** Question
+** Answer
+* Problem 14
+** Question
+** Answer
+
+
+
