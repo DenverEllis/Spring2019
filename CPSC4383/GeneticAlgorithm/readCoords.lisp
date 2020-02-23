@@ -1,3 +1,13 @@
+;;; readCoords.lisp
+;;  THIS IS SOLEY A TEST FILE. IT DOES NOT CONTRIBUTE TO THE PROJECT. IT WAS
+;;  ONLY USED FOR TESTING LISP CONCEPTS. This file can be considered scratch
+;;  work. The file name holds no meaning to the contents.
+
+;;Author: Denver Ellis <dsellis@ualr.edu>
+;;Maintained By: Denver Ellis <dsellis@ualr.edu>
+;;Created: 10 Feb 2020
+;;Last Updated: 23 Feb 2020
+
 (defparameter *s* (open "./cities.txt"))
 
 (defparameter *cities* (list
@@ -153,8 +163,6 @@
   "Helper function for crossover"
   (list (position gene chromosome :key #'car :test #'eql)
         (remove gene chromosome :key #'car :test #'eql)))
-;; when city names are strings use `:test #'string=
-;; (0 2 2 0 0)
 
 (defun encode-chromosome (city-list city-sequence)
   "Helper function for crossover"
@@ -165,17 +173,3 @@
                          idx)
 	  into index-positions
           finally (return index-positions))))
-
-
-(setf test (generate-random-chromosome (copy-list *test*)))
-(setf testE (encode-chromosome (copy-list test) (copy-list *test*)))
-
-(format t (write-to-string test))
-(terpri)
-(terpri)
-(format t (write-to-string testE))
-(terpri)
-(terpri)
-
-(format t (write-to-string (encode-chromosome (copy-list (generate-random-chromosome (copy-list *cities2*))) *cities2*)))
-;(format t (write-to-string (encode-chromosome *test3* *test*)))

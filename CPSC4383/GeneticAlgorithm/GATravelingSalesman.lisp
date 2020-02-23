@@ -1,12 +1,34 @@
-;; Note: To scale this to a 3rd or nth dimension, only the distance function
-;;       needs to be modified
+;;; GATravelingSalesman.lisp
+;;  Genetic Algorithm Implementation To Solve The Traveling Salesman Problem
 
-;; Take in arguments, will be used later
+;; Copyright (c) 2020 Denver S. Ellis
+
+;;Author: Denver Ellis <ellis.denver@yahoo.com>
+;;Maintained By: Denver Ellis <ellis.denver@yahoo.com>
+;;Created: 10 Feb 2020
+;;Last Updated: 23 Feb 2020
+
+;; This program is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License as
+;; published by the Free Software Foundation; either version 2 of
+;; the License, or (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be
+;; useful, but WITHOUT ANY WARRANTY; without even the implied
+;; warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+;; PURPOSE.  See the GNU General Public License for more details.
+
+
+
+;; NOTE: To scale this to a 3rd or nth dimension, only the distance function
+;;       needs to be modified. Current function handles 2D space (i.e each city
+;;       has an x and y only)
+
+;; Take in commandline arguments: deprecated temporarily
 ;(defparameter *target* (cadr *args*))
 ;(defparameter *pop-size* (parse-integer (car *args*)))
 
-;; Set globals for mutation and cross-over rate. Allows for easy comparison
-;; of results
+;; Set globals for mutation and cross-over rate. Allows for easy comparison of results
 (defvar *mutation-rate* 0.001)
 (defvar *crossover-rate* 0.7)
 
@@ -70,6 +92,7 @@
     (append (subseq lst 0 (- n 1)) (subseq lst n (length lst))))
 
 ;; Helper function to sort rankings from Hi to Lo
+;; This is deadcode and is unused.
 (defun selection-sort (list)
   (when list
     (let ((maximum-element (reduce #'max list)))
@@ -118,7 +141,9 @@
        collect (route-distance chromosome)))
 
 (defun crossover (first second)
-  "Returns a mix of two chromosomes. No change is a valid possibility"
+  "Returns a mix of two chromosomes. No change is a valid possibility.
+   NOTE: The city list must be encode before crossover and decoded after.
+         This is not handled in this function."
   (if (< (random 1.0) *crossover-rate*)
       (let ((point (+ (random (- (length first) 1)) 1)))
 	(append (subseq first 0 point)
@@ -126,14 +151,14 @@
     (random-item (list first second))))
 
 (defun encode-gene (chromosome gene)
-  "Helper function for crossover"
+  "Helper function for crossover using destructive list handling"
   (list (position gene chromosome :key #'car :test #'eql)
         (remove gene chromosome :key #'car :test #'eql)))
 ;; when city names are strings use `:test #'string=
 ;; (0 2 2 0 0)
 
 (defun encode-chromosome (city-list city-sequence)
-  "Helper function for crossover"
+  "Helper function for crossover to encode the chromosomes"
   (let ((current-cities city-list))
     (loop for current-city in city-sequence
           for (idx updated-cities) = (encode-gene current-cities current-city)
@@ -148,7 +173,7 @@
                                         (acc-positions '())
                                         (pos-counter 0)
                                         (test #'eql))
-  "Helper function for crossover"
+  "Helper function for crossover to encode chromosomes in a non-destructive way"
     (cond ((or (null city-sequence) (null cities)) (nreverse acc-positions))
           ((funcall test (car city-sequence) (car cities))
            (encode-chromosome (append (nreverse acc-cities) (cdr cities))
@@ -165,19 +190,18 @@
 				:test test))))
 
 (defun decode-gene (n identity)
-  "Helper to decode after crossover"
+  "Helper to decode after crossover using destructive list handling"
   (list (nth n identity)
 	(setf identity (remove-nth (+ n 1) identity))))
 
 (defun decode-chromosome (chromosome city-sequence)
-  "Helper function for crossover"
+  "Helper function for crossover to decode chromosomes"
   (let ((current-genes city-sequence))
   (loop for current-gene in chromosome
 	for (idx updated-genes) = (decode-gene current-gene current-genes)
 	collect (progn (setf current-genes updated-genes) idx)
 	into decoded-chromosomes
 	finally (format t (write-to-string decoded-chromosomes)))))
-
 
 (defun make-probability (fitness)
   (let ((total-fitness (reduce #'+ fitness))
@@ -195,6 +219,10 @@
        do (return chromosome))))
 
 (defun repopulate (pool fitness)
+  "Uses the roulette wheel strategy to select parents for crossover and
+   repopulation. Both chromosomes are encoded before crossover, and decoded
+   immediately after before mutation. encoding and decoding of chromosomes is
+   not handled by crossover. "
   (let ((probability-chart (make-probability fitness)))
     (loop for i from 1 to (length pool)
 	  collect (mutate (crossover (encode-chromosome
@@ -205,6 +233,7 @@
 				      (copy-list *cities*)))))))
 
 (defun create-initial-pool (pool-size chromosome)
+  "Creates a pool of randomized chromosomes"
   (loop for i from 1 to pool-size
      collect (generate-random-chromosome chromosome)))
 
@@ -219,13 +248,17 @@
     (values best-chromosome best-score)))
 
 (defun display-turn (pool fitness turn)
+  "Displayes the details of each generation"
   (multiple-value-bind (chromosome score) (find-best-chromosome pool fitness)
     (let ((avg-fitness (/ (reduce #'+ fitness) (+ 1 (length pool))))
 	  (*print-pretty* nil))
       (format t "~a - Average Fitness: ~F Best: ~w (fitness ~F)~%" turn avg-fitness chromosome score))))
 
 (defun genetic-algorithm (pop-size chromosome tries)
-  "Pass in the initial list of cities as the chromosome"
+  "Pass in the initial list of cities as the chromosome. The function generates
+   the initial pool on its own. From there it runs the genetic algorithm on the
+   set and prints results of each generation. All previous functions should
+   build into this one."
   (let ((pool (create-initial-pool pop-size chromosome))
 	(fitness))
     (loop for i from 1 to tries
@@ -235,7 +268,6 @@
        finally (return (find-best-chromosome pool fitness)))))
 
 
-;(genetic-algorithm 5 (copy-list *cities*) 10)
 
 
 
@@ -283,18 +315,16 @@
 
 ;(format t (write-to-string (repopulate *pool* (pool-fitness *pool*))))
 
-(setf test (generate-random-chromosome (copy-list *cities*)))
-(setf testE (encode-chromosome test (copy-list *cities*)))
-(setf testD (decode-chromosome (copy-list testE) (copy-list *cities*)))
+;(setf test (generate-random-chromosome (copy-list *cities*)))
+;(setf testE (encode-chromosome test (copy-list *cities*)))
+;(setf testD (decode-chromosome (copy-list testE) (copy-list *cities*)))
 
-(terpri) (terpri)
-
-(format t (write-to-string test))
-(terpri)
-(terpri)
-(format t (write-to-string testE))
-(terpri)
-(terpri)
+;(format t (write-to-string test))
+;(terpri)
+;(terpri)
+;(format t (write-to-string testE))
+;(terpri)
+;(terpri)
 ;(format t (write-to-string testD))
 
 ;(format t (write-to-string (decode-chromosome (encode-chromosome (copy-list (generate-random-chromosome (copy-list *cities*))) *cities*) *cities*)))
