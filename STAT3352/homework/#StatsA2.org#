@@ -1,0 +1,280 @@
+#+TITLE: STAT 3352 Homework Chapter 2
+#+AUTHOR: Denver Ellis
+#+OPTIONS: tex:t
+#+LaTeX_COMPILER: pdflatex
+
+* Problem 1
+** Question
+A family consisting of three persons—A, B, and C—goes to a medical clinic that always has a doctor at each of stations 1, 2, and 3. During a certain week, each member of the family visits the clinic once and is assigned at random to a station. The experiment consists of recording the station number for each member. One outcome is (1, 2, 1) for A to station 1, B to station 2, and C to station 1.
+
+- List the 27 outcomes in the sample space.
+- List all outcomes in the event that all three members go to the same station.
+- List all outcomes in the event that all members go to differentstations.
+- List all outcomes in the event that no one goes to station 2.
+** Answer
+*** Part A)
+The following are all 27 possibilities:
+
+(1, 1, 1)
+(1, 1, 2)
+(1, 1, 3)
+(1, 2, 1)
+(1, 2, 2)
+(1, 2, 3)
+(1, 3, 1)
+(1, 3, 2)
+(1, 3, 3)
+(2, 1, 1)
+(2, 1, 2)
+(2, 1, 3)
+(2, 2, 1)
+(2, 2, 2)
+(2, 2, 3)
+(2, 3, 1)
+(2, 3, 2)
+(2, 3, 3)
+(3, 1, 1)
+(3, 1, 2)
+(3, 1, 3)
+(3, 2, 1)
+(3, 2, 2)
+(3, 2, 3)
+(3, 3, 1)
+(3, 3, 2)
+(3, 3, 3)
+
+
+*** Part B)
+The following are all outcomes where each member goes to the same station:
+
+(1, 1, 1)
+(2, 2, 2)
+(3, 3, 3)
+
+*** Part C)
+The following are all outcomes where each member attends a different station:
+
+(1, 2, 3)
+(1, 3, 2)
+(2, 1, 3)
+(2, 3, 1)
+(3, 2, 1)
+(3, 1, 2)
+
+*** Part D)
+The following are all outcomes where no member attends station 2:
+
+(1, 1, 1)
+(1, 1, 3)
+(1, 3, 1)
+(1, 3, 3)
+(3, 1, 1)
+(3, 1, 3)
+(3, 3, 1)
+(3, 3, 3)
+
+* Problem 2
+** Question
+A mutual fund company offers its customers a variety of funds: a money-market fund, three different bond funds (short, intermediate, and long-term), two stock funds (moderate and high-risk), and a balanced fund. Among customers who own shares in just one fund, the percentages of customers in the different funds are as follows: Money-market 20%, High-risk stock 18%, Short bond 15%, Moderate-risk stock 25%, Intermediate bond 10%, Balanced 7%, Long bond 5%.
+
+ A customer who owns shares in just one fund is randomly selected.
+
+- What is the probability that the selected individual owns shares in the balanced fund?
+- What is the probability that the individual owns shares in a bond fund?
+- What is the probability that the selected individual does not own shares in a bond fund?
+** Answer
+*** Part A)
+The probability that the selected individual owns shares in the balanced fund is given to be 0.07 or 7%
+
+*** Part B)
+The proability that an individual owns shares in a bond fund is equal to the sum of the probabilities for owning any of the bond funds.
+
+P(SB) = 15%
+P(IB) = 10&
+P(LB) = 5%
+P(B) = 15% + 10% + 5%
+P(B) = 30%
+
+The probability  that the indiviual owns shares in a bond fund is 30% or 0.30.
+
+Given in R:
+#+BEGIN_SRC R
+> choose(30,1)/choose(100,1)
+[1] 0.3
+#+END_SRC
+
+*** Part C)
+The probability that an indiviual owns shares in a bond fund is as follows:
+
+#+BEGIN_SRC R
+> (choose(100, 1) - choose(30, 1)) / choose(100, 1)
+#+END_SRC
+Which is the same as...
+
+#+BEGIN_SRC R
+> choose(70, 1) / choose(100, 1)
+[1] 0.7
+#+END_SRC
+or 70%
+
+* Problem 3
+** Question
+A box contains six 40-W bulbs, five 60-W bulbs, and four 75-W bulbs. If bulbs are selected one by one in random order, what is the probability that at least two bulbs must be selected to obtain one that is rated 75 W?
+** Answer
+In total, there are 15 bulbs. Four of the bulbs are 75-W bulbs. The problem is find the probability of selecting at least one 75-W bulb is selected out of two chosen.
+
+Expressed in R:
+#+BEGIN_SRC R
+> (choose(4,1)-choose(11,1))/choose(15,2)
+[1] 0.03809524
+#+END_SRC
+or 3.8%.
+* Problem 4
+** Question
+A box in a certain supply room contains four 40-W lightbulbs, five 60-W bulbs, and six 75-W bulbs. Suppose that three bulbs are randomly selected.
+
+- What is the probability that exactly two of the selected bulbs are rated 75-W?
+- What is the probability that all three of the selected bulbs have the same rating?
+- What is the probability that one bulb of each type is selected?
+** Answer
+In total there are 15 bulbs. Three bulbs are chosen.
+*** Part A
+The probability of exactly two 75-W bulbs being chosen can be represented as the following in R:
+
+#+BEGIN_SRC R
+> (choose(6, 2)*choose(9, 1)) / choose(15, 3)
+[1] 0.03296703
+#+END_SRC
+
+or 3.3%
+
+*** Part B
+The probability that all three bulbs of the selected bulbs have the same rating can be expressed by the following in R:
+#+BEGIN_SRC R
+> (choose(4, 3) + choose(5, 3) + choose(6, 3))/choose(15,3)
+[1] 0.07472527
+#+END_SRC
+or 7.5%
+
+*** Part C
+The probability that one bulb of each type is selected can be evaluated in R by:
+#+BEGIN_SRC R
+> (choose(4, 1) * choose(5, 1) * choose(6, 1))/choose(15,3)
+[1] 0.2637363
+#+END_SRC
+* Problem 5
+** Question
+Suppose an individual is randomly selected from the population of all adult males living in the United States. Let A be the event that the selected individual is over 6 ft in height, and let B be the event that the selected individual is a professional basketball player. Which do you think is larger, P(A|B) or P(B|A) ? Why?
+** Answer
+Consider P(B|A) and P(A|B) expressed verbally. P(B|A) represents the proportion of professional basketball players among men over 6ft tall. P(A|B) represents the proportion of men over 6ft tall among professional basketball players. There is a stereotype for basketball players being taller than average so I assume P(A) > P(B).
+
+Mathmatically:
+P(A|B)= P(A \cap B)/P(B).
+P(B|A)= P(B \cap A)/P(A).
+Since P(A) > P(B),
+P(A|B) > P(B|A).
+* Problem 6
+** Question
+The population of a particular country consists of three ethnic groups. Each individual belongs to one of the four major blood groups. The accompanying joint probability table gives the proportions of individuals in the various ethnic group–blood group combinations.
+
+Blood Group:
+| Ethnic Group |     O |     A |     B |    AB |
+|--------------+-------+-------+-------+-------|
+|            1 | 0.082 | 0.106 | 0.008 | 0.004 |
+|            2 | 0.135 | 0.141 | 0.018 | 0.006 |
+|            3 | 0.215 | 0.200 | 0.065 | 0.020 |
+
+Suppose that an individual is randomly selected from the
+population, and define events by A=type A selected, B=type B selected
+and C= ethnic group 3 selected.
+
+- Calculate P(A), P(C), and P(A and C)
+- Calculate both P(A|C) and P(C|A), and explain in context what each of these probabilities represents.
+- If the selected individual does not have type B blood, what is the probability that he or she is from ethnic group 1?
+** Answer
+*** Part A
+P(A) = P(1 \cap A) + P(2 \cap A) + P(3 \cap A)
+P(A) =  0.106 + 0.141 + 0.200
+P(A) = 0.447
+
+P(C) = P(3 \cap O) + P(3 \cap A) + P(3 \cap B) + P(3 \cap AB)
+P(C) = 0.215 + 0.200 + 0.065 + 0.020
+P(C) = 0.5
+
+P(A \cap C) = P(3 \cap A)  = 0.200
+
+*** Part B
+P(A|C) = P(A \cap C) / P(C)
+P(A|C) = 0.200 / (0.215 + 0.200 + 0.065 + 0.020)
+P(A|C) = 0.200 / 0.5
+P(A|C) = 0.4
+
+P(C|A) = P(C \cap A) / P(A)
+P(C|A) = 0.200 / (0.106 + 0.141 + 0.200)
+P(C|A) = 0.200 / 0.447
+P(C|A) = 0.447
+*** Part C
+P(g1) - P(B) = P(O1) + P(A1) + P(AB1)
+P(g1) - P(B) = 0.082 + 0.106 + 0.004
+P(g1) - P(B) = 0.192 = 19.2%
+* Problem 7
+** Question
+The proportions of blood phenotypes in the U.S. population are as follows:
+
+|   A |   B |  AB |   O |
+|-----+-----+-----+-----|
+| .40 | .11 | .04 | .45 |
+
+Assuming that the phenotypes of two randomly selected individuals are independent of one another, what is the probability that both phenotypes are O? What is the probability that the phenotypes of two randomly selected individuals match?
+** Answer
+*** Part 1
+Phenotypes are both O:
+P(2 O's) = P(O) * P(O)
+P(2 O's) = 0.45 * 0.45
+P(2 O's) = 0.2025
+
+*** Part 2
+Penotypes match:
+P(match) = P(A)^2 + P(B)^2 + P(AB)^2 + P(O)^2
+P(match) = 0.4^2 + 0.11^2 + 0.04^2 + 0.45^2
+P(match) = 0.3762
+
+* Problem 8
+** Question
+Seventy percent of all vehicles examined at a certain emissions inspection station pass the inspection. Assuming that successive vehicles pass or fail independently of one another, calculate the following probabilities:
+- P(all of the next three vehicles inspected pass)
+- P(at least one of the next three inspected fails)
+- P(exactly one of the next three inspected passes)
+- P(at most one of the next three vehicles inspected passes)
+- Given that at least one of the next three vehicles passes inspection, what is the probability that all three pass (a conditional probability)?
+** Answer
+*** Part A
+P(all of the next three vehicles inspected pass) = 0.7^3
+P(all of the next three vehicles inspected pass) = 0.343
+
+In R:
+#+BEGIN_SRC R
+> dbinom(3, 3, 0.7)
+[1] 0.343
+#+END_SRC
+*** Part B
+P(at least one of the next three inspected fails) = 1 - 0.343
+P(at least one of the next three inspected fails) = 0.657
+*** Part C
+In R:
+#+BEGIN_SRC R
+> dbinom(1, 3, 0.7)
+[1] 0.189
+#+END_SRC
+*** Part D
+In R:
+#+BEGIN_SRC R
+> dbinom(1, 3, 0.7) + dbinom(0, 3, 0.7)
+[1] 0.216
+#+END_SRC
+*** Part E
+In R:
+#+BEGIN_SRC R
+> dbinom(3, 3, 0.7) / (dbinom(1, 3, 0.7) + dbinom(2, 3, 0.7) + dbinom(3, 3, 0.7))
+[1] 0.352518
+#+END_SRC

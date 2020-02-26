@@ -270,7 +270,7 @@
 
 
 
-
+(genetic-algorithm 50 *cities* 50)
 
 ;;; ========================================================================================
 ;;; The below commands were called for debugging. Use it for insight into my thought process

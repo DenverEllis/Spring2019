@@ -10,6 +10,9 @@
 			'(7.792783481, 3.424088941, 1)
 			'(7.939820817, 0.791637231, 1)))
 
+(defun sqr (x)
+  (* x x))
+
 (defun sum-l (list)
   (if (equal list nil) 0
       (+ (car x) (sum-l (cdr x)))))
@@ -20,6 +23,6 @@
         (/ (sum-l list) (list-length list))))
 
 (defun stdev-l (list)
-  (
+  (sum-l
 
 (defun separate-by-class (data)
