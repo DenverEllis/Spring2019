@@ -1,11 +1,11 @@
-#+TITLE: STAT 3352 Homework Chapter 2
+#+TITLE: STAT 3352 Homework Chapter 4
 #+AUTHOR: Denver Ellis
-#+OPTIONS: tex:t
+#+OPTIONS: num:1
 #+LaTeX_COMPILER: pdflatex
 
 * Problem 1
 ** Question
-A college professor never finishes his lecture before the end of the hour and always finishes his lectures within 2 min after the hour. Let X=the time that elapses between the end of the hour and the end of the lecture and suppose the pdf of X is f(x)=kx2 if 0<=x<=2 and 0 otherwise. 
+A college professor never finishes his lecture before the end of the hour and always finishes his lectures within 2 min after the hour. Let X=the time that elapses between the end of the hour and the end of the lecture and suppose the pdf of X is f(x)=kx^2 if 0<=x<=2 and 0 otherwise.
 
 a. Find the value of k and draw the corresponding density curve. [Hint: Total area under the graph of f(x) is 1.]
 b. What is the probability that the lecture ends within 1 min of the end of the hour?
@@ -16,12 +16,59 @@ The value of k can be found by
 1 = \int_0^2 kx^2 dx => k = 3/8
 
 We can draw this with the following R commands:
+#+BEGIN_SRC R
+> k = 3/8
+> x = seq(0, 2, length = 100)
+> f = k * x * x
+> d <- density(f)
+> plot(d)
+#+END_SRC
 
+Which will yield the following image:
+#+CAPTION: Density curve for f(x) = kx^2 on the interval (0, 2)
+#+NAME: fig:h4p1
+
+[[./imgs/h4p1.jpg]]
+
+
+*** Part B
+The probability the lecture ends within 1 min of the end of the hour can be represented by the following.
+
+$F(X) = P(X \le x)  = \int_0^x (\frac{3}{8} x^2) dx$ \\
+$F(Xx) = \frac{x^3}{8}$ \\
+$F(1) = \frac{1}{8} = 0.125$ \\
+
+*** Part C
+The mean and variance of X can be found in R by:
+
+#+BEGIN_SRC R
+> x = seq(0, 2, length = 100)
+> k = 3/8
+> X = x * x * k
+> mean(X)
+[1] 0.5025253
+> var(X)
+[1] 0.2063577
+#+END_SRC
 * Problem 2
 ** Question
+The time X (min) for a lab assistant to prepare the equipment for a certain experiment is believed to have a uniform distribution with A=25 and B=35.
+
+1. Determine the pdf of X and sketch the corresponding density curve.
+2. What is the probability that preparation time exceeds 33 min?
+3. What are the mean and variance value of X.
+4. What is the cdf of the X.
 ** Answer
+*** Part A
+*** Part B
+*** Part C
+*** Part D
 * Problem 3
 ** Question
+Let Z be a standard normal random variable and calculate the following probabilities, drawing pictures wherever appropriate.
+
+1. P(0 <Z < 2.17)
+2. P(1.5<Z)
 ** Answer
 * Problem 4
 ** Question
@@ -43,7 +90,7 @@ We can draw this with the following R commands:
 ** Answer
 * Problem 10
 ** Question
-** Answe
+** Answer
 * Problem 11
 ** Question
 ** Answer

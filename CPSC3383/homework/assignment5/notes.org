@@ -26,9 +26,14 @@ int main() {
 }
 #+END_SRC
 ** Screenshots
-#+CAPTION: This is the caption for the next figure link (or table)
-#+NAME:   fig:SED-HR4049
+#+CAPTION: Compiling the code for question 1
+#+NAME:   fig:h5p1
 [[./imgs/h5p1.png]]
+
+#+CAPTION: Running executable for question 1
+#+NAME: fig:h5p2
+[[./imgs/h5p2.png]]
+
 * Question 2
 ** Source
 #+BEGIN_SRC c
@@ -77,6 +82,13 @@ void *runner(void *param)
 }
 #+END_SRC
 ** Screenshots
+#+CAPTION: Navigating to and compiling code for question 2
+#+NAME: fig:h5p3
+[[./imgs/h5p3.png]]
+
+#+CAPTION: Running the executable for question 2
+#+NAME: fig:h5p4
+[[./imgs/h5p4.png]]
 * Question 3
 ** Source
 #+BEGIN_SRC c
@@ -94,3 +106,6 @@ int main(int argc, char *argv[])
 }
 #+END_SRC
 ** Screenshot
+#+CAPTION: Displaying, compiling, and executing the code for question 3
+#+NAME: fig:h5p5
+[[./imgs/h5p5.png]]
