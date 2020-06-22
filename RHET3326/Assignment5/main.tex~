@@ -1,0 +1,48 @@
+\documentclass[a4paper]{article}
+\input{style/head.tex}
+\input{style/styles}
+
+%-------------------------------
+%	TITLE VARIABLES
+%-------------------------------
+\newcommand{\yourname}{Denver Ellis} % replace YOURNAME with your name
+\newcommand{\yournetid}{T00591699} % replace YOURNETID with your NetID
+\newcommand{\youremail}{dsellis@ualr.edu} % replace YOUREMAIL with your email
+\newcommand{\assignmentnumber}{3} % replace X with assignment number
+
+
+
+\begin{document}
+%-------------------------------
+%	TITLE SECTION
+%-------------------------------
+\input{style/header.tex}
+%\tableofcontents
+%\clearpage
+%\newcommand{\sectionbreak}{\clearpage} % new page for every section
+
+
+\section*{Preface}
+\paragraph{The selected work is the Guerilla Open Access Manifesto by Aaron Swartz. Aaron is a respected American programmer and hacktivist who took his life in January of 2013. Authoring the manifesto in 2008, the work has been adopted by many movements that value the freedom of privatized information to the public.}
+
+\section*{Writer's Objective}
+\paragraph{The writer's primary purpose is to recruit and cause rise for a movement in the freedom of information. The author succeeds in his cause if he illicits action through his words.}
+
+
+\section*{Pursuasive Strategies}
+\paragraph{Strategies used by the author predominantly evoke a response through reasoning and emotion. There is little call to the authors credibility. Though he is highly credible, this must be found upon further digging. The author offers subtle calls to action in a few different areas. He illicits a pathos response through the telling of the injustice in the corporate system. He then drives the point home with a logical call to action using logos.}
+
+\paragraph{The author's strategy to primarily use pathos and logos appeals is effective when calling to action present sympathizers of the cause. While the work can still come to agree with the movement he is trying to create, it could do better. To do so, the author should utilize more ethos to build his own credibility or the credibility of the movement. One strategy for doing so might be to discuss the works of Dens Diderot during the Age of Enlightenment. This would show the history of the movement. However, the work is a manifesto, and the purpose of the author is not to gain followers but to illicit action. In this way, the author accomplishes his goal well.}
+
+
+\section*{Writer's Voice}
+\paragraph{The author uses a sense of urgency in his voice (kairos if you will) by utilizing words/phrases like "need" or "Everything up till now will have been lost." This verbiage and sentence structure really sets the tone for the piece to be critical and accusatory. The tone is critical in its urgency to take action now, and accusatory in the way is blame corporate/academic norms for the need to take action.}
+
+
+\section*{Appropriate Voice?}
+\paragraph{The author's voice is appropriate considering the nature of document and audience of readers. The documents nature as a manifesto is designed to appeal to individuals who already agree with it and to spark controversy among those that do not. The target audience of the manifesto are individuals with access to private information, "hacktivists", internet pirates, and current "warriors of the movement". To bring a voice of urgency to plead action from this type of audience is an effective and appropriate strategy.}
+
+
+
+\bibliography{references.bib}
+\end{document}
