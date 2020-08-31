@@ -1,0 +1,25 @@
+#+TITLE: Assignment01: Matrix Assignment
+#+AUTHOR: Denver Ellis
+#+EMAIL: dsellis@ualr.edu
+#+DATE: <2020-08-31 Mon>
+#+CATEGORY: IFSC 4399: Intro To R
+
+* Exercise 1
+** Question
+See the given statement in R:
+#+begin_src R
+M <- matrix(c(1:10),nrow=5,ncol=2, dimnames=list(c("a","b","c","d","e"),c("A","B")))
+#+end_src
+
+
+** Studented Evaluated Solution
+** R Evaluated Solution
+* Exercise 2
+** Question
+Create three vectors x,y,z with integers and each vector has 3 elements. Combine the three vectors to become a3∗3 matrix A where each column represents a vector. Change the row names to a,b,c.
+
+** Solution
+
+
+* Email Assignment
+subject line: Matrix Assignment
