@@ -1,0 +1,441 @@
+% Created 2020-09-03 Thu 23:07
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Denver Ellis}
+\date{\textit{<2020-08-31 Mon>}}
+\title{Assignment01: Matrix Assignment}
+\hypersetup{
+ pdfauthor={Denver Ellis},
+ pdftitle={Assignment01: Matrix Assignment},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.3)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Vector}
+\label{sec:orge14d3cd}
+\subsection{Exercise 1}
+\label{sec:orga89f943}
+\subsubsection{Question}
+\label{sec:orgf94c2df}
+Consider two vectors, a, b
+
+\begin{verbatim}
+> a <- c(1,5,4,3,6)
+> b <- c(3,5,2,1,9)
+\end{verbatim}
+
+What is the value of: a <= b
+
+\subsubsection{Answer}
+\label{sec:org5ae651d}
+\begin{verbatim}
+> a <= b
+[1]  TRUE  TRUE FALSE FALSE  TRUE
+\end{verbatim}
+
+\subsection{Exercise 2}
+\label{sec:org761aac6}
+\subsubsection{Question}
+\label{sec:org06991bb}
+Consider two vectors, x, y
+
+\begin{verbatim}
+> x <- c(12:4)
+> y <- c(0,1,2,0,1,2,0,1,2)
+\end{verbatim}
+
+What is the value of: \texttt{which(!is.finite(x/y))}
+
+\subsubsection{Answer}
+\label{sec:orgdd6881e}
+\begin{verbatim}
+> which(!is.finite(x/y))
+[1] 1 4 7
+\end{verbatim}
+
+\subsection{Exercise 3}
+\label{sec:org24a233c}
+\subsubsection{Question}
+\label{sec:org4e14d9f}
+\begin{verbatim}
+> x <- c(1,2,3,4)
+\end{verbatim}
+
+What is the value of k for:
+\begin{verbatim}
+> (x+2)[(!is.na(x)) & x > 0] -> k
+\end{verbatim}
+
+\subsubsection{Answer}
+\label{sec:orgf0bfa9f}
+\texttt{k} stores the output of the evaluated statement.
+
+\subsection{Exercise 4}
+\label{sec:org46c59ab}
+\subsubsection{Question}
+\label{sec:org5a927e2}
+If
+\begin{verbatim}
+> x <- c(2, 4, 6, 8)
+> y <- c(TRUE, TRUE, FALSE, TRUE)
+\end{verbatim}
+
+What is the value of: \texttt{sum(x[y])}
+
+\subsubsection{Answer}
+\label{sec:org9732293}
+The value of \texttt{sum(x[y])} is 14
+
+\subsection{Exercise 5}
+\label{sec:org3b0d568}
+\subsubsection{Question}
+\label{sec:org8dd2327}
+Consider the vector:
+
+\begin{verbatim}
+> x <- c(34, 56, 55, 87, NA, 4, 77, NA, 21, NA, 39)
+\end{verbatim}
+
+Which R-statement will count the number of NA values in x?
+
+\begin{center}
+\begin{tabular}{ll}
+a & count(is.na(X))\\
+b & length(is.na(x))\\
+c & sum(is.na(x))\\
+d & count(!is.na(x))\\
+e & sum(!is.na(x))\\
+\end{tabular}
+\end{center}
+
+\subsubsection{Answer}
+\label{sec:org91cccb7}
+The answer is \texttt{c: sum(is.na(x))}
+
+\section{List}
+\label{sec:orgb0222ea}
+\subsection{Exercise 1}
+\label{sec:orgace8420}
+\subsubsection{Question}
+\label{sec:org1cce081}
+If:
+\begin{verbatim}
+> p <- c(2,7,8)
+> q <- c("A", "B", "C")
+> x <- list(p,q)
+\end{verbatim}
+
+Then what is the value of \texttt{x[2]}:
+\begin{center}
+\begin{tabular}{ll}
+a & NULL\\
+b & "A" "B" "C"\\
+c & "7"\\
+\end{tabular}
+\end{center}
+
+\subsubsection{Answer}
+\label{sec:org14fad2a}
+The answer is \texttt{b: "A" "B" "C"}
+
+\subsection{Exercise 2}
+\label{sec:orgb656c8d}
+\subsubsection{Question}
+\label{sec:org51c90f3}
+If:
+\begin{verbatim}
+> w <- c(2,7,8)
+> v <- c("A", "B", "C")
+> x <- list(w,v)
+\end{verbatim}
+
+Then write an R statement tha will replace "A" in x with "K". The exepected output:
+\begin{verbatim}
+> x
+[[1]]
+[1] 2 7 8
+
+[[2]]
+[1] "K" "B" "C"
+\end{verbatim}
+
+\subsubsection{Answer}
+\label{sec:orgb4f6942}
+\begin{verbatim}
+> x[[2]] <- c("K", "B", "C")
+> x
+[[1]]
+[1] 2 7 8
+
+[[2]]
+[1] "K" "B" "C"
+\end{verbatim}
+
+\subsection{Exercise 3}
+\label{sec:org66e4a5e}
+\subsubsection{Question}
+\label{sec:org82b8962}
+If:
+\begin{verbatim}
+> a <- list ("x"=5, "y"=10, "z"=15)
+\end{verbatim}
+
+Which R statement will give the sum of all elements in a?
+\begin{center}
+\begin{tabular}{ll}
+a & sum(a)\\
+b & sum(list(a))\\
+c & sum(unlist(a))\\
+\end{tabular}
+\end{center}
+
+\subsubsection{Answer}
+\label{sec:org23dac8f}
+The answer is \texttt{c: sum(unlist(a))} with a value of 30
+
+\subsection{Exercise 4}
+\label{sec:org73af6aa}
+\subsubsection{Question}
+\label{sec:orgea5cea4}
+If:
+\begin{verbatim}
+> Newlist <- list(a=1:10, b="Good morning", c="Hi")
+\end{verbatim}
+
+Write an R statement that will add 1 to each element of the first vector in Newlist.  The expected output:
+\begin{verbatim}
+ > Newlist
+$a
+[1]  2  3  4  5  6  7  8  9 10 11
+
+$b
+[1] "Good morning"
+
+$c
+[1] "Hi"
+\end{verbatim}
+
+\subsubsection{Answer}
+\label{sec:orgf0c6268}
+\begin{verbatim}
+> Newlist$a <- Newlist$a + 1
+> Newlist
+$a
+ [1]  2  3  4  5  6  7  8  9 10 11
+
+$b
+[1] "Good morning"
+
+$c
+[1] "Hi"
+\end{verbatim}
+
+\subsection{Exercise 5}
+\label{sec:org5cdfc07}
+\subsubsection{Question}
+\label{sec:org13714fa}
+If:
+\begin{verbatim}
+> b <- list(a=1:10, c="Hello", d="AA")
+\end{verbatim}
+
+Write an R expression that will give all elements, except the second, of the first vector of b.  The expected output:
+\begin{verbatim}
+[1]  1  3  4  5  6  7  8  9 10
+\end{verbatim}
+
+\subsubsection{Answer}
+\label{sec:orgb639f67}
+\begin{verbatim}
+> which(b$a != b$a[2])
+[1]  1  3  4  5  6  7  8  9 10
+\end{verbatim}
+
+\subsection{Exercise 6}
+\label{sec:orgffa16c7}
+\subsubsection{Question}
+\label{sec:org56bcce1}
+Let
+\begin{verbatim}
+> x <- list(a=5:10, c="Hello", d="AA")
+\end{verbatim}
+
+Write an R statement to add a new item z = “NewItem” to the list x.  The expected output:
+\begin{verbatim}
+> x
+$a
+[1]  5  6  7  8  9 10
+
+$c
+[1] "Hello"
+
+$d
+[1] "AA"
+
+$z
+[1] "New Item"
+\end{verbatim}
+
+\subsubsection{Answer}
+\label{sec:orge3eddee}
+\begin{verbatim}
+> x$z <- "NewItem"
+> x
+$a
+[1]  5  6  7  8  9 10
+
+$c
+[1] "Hello"
+
+$d
+[1] "AA"
+
+$z
+[1] "NewItem"
+\end{verbatim}
+
+\subsection{Exercise 7}
+\label{sec:org2c1b5e5}
+\subsubsection{Question}
+\label{sec:orgca11c5c}
+Consider
+\begin{verbatim}
+> y <- list("a", "b", "c")
+\end{verbatim}
+
+Write an R statement that will assign new names ”one”, ”two” and ”three” to the elements of y.  The expected output:
+\begin{verbatim}
+> y
+$one
+[1] "a"
+
+$two
+[1] "b"
+
+$three
+[1] "c"
+\end{verbatim}
+
+\subsubsection{Answer}
+\label{sec:org6075b69}
+\begin{verbatim}
+> names(y) <- c("one", "two", "three")
+> y
+$one
+[1] "a"
+
+$two
+[1] "b"
+
+$three
+[1] "c"
+\end{verbatim}
+
+\subsection{Exercise 8}
+\label{sec:org0348b04}
+\subsubsection{Question}
+\label{sec:org4f3f2dd}
+If
+\begin{verbatim}
+> x <- list(y=1:10, t="Hello", f="TT", r=5:20)
+\end{verbatim}
+
+Write an R statement that will give the length of vector r of x.  The expected output:
+\begin{verbatim}
+[1] 16
+\end{verbatim}
+
+\subsubsection{Answer}
+\label{sec:orge77aee7}
+\begin{verbatim}
+> length(x$r)
+[1] 16
+\end{verbatim}
+
+\subsection{Exercise 9 (Bonus)}
+\label{sec:org3d52e60}
+\subsubsection{Question}
+\label{sec:orgfc42656}
+Let
+\begin{verbatim}
+> string <- "Grand Opening"
+\end{verbatim}
+
+Write an R statement to split this string into two and return the following output:
+\begin{verbatim}
+[[1]]
+[1] "Grand"
+
+[[2]]
+[1] "Opening"
+\end{verbatim}
+
+hint:  use strsplit() function
+\subsubsection{Answer}
+\label{sec:org70a0315}
+A very inefficient solution\ldots{}
+\begin{verbatim}
+> list(sapply(strsplit(string, " "), "[", 1), sapply(strsplit(string, " "), "[", 2))
+[[1]]
+[1] "Grand"
+
+[[2]]
+[1] "Opening"
+\end{verbatim}
+
+\subsection{Exercise 10 (Bonus)}
+\label{sec:org3c1d2d4}
+\subsubsection{Question}
+\label{sec:org0d041af}
+Let
+\begin{verbatim}
+> y <- list("a", "b", "c")
+> q <- list("A", "B", "C", "a", "b", "c").
+\end{verbatim}
+
+Write an R statement that will return all elements of q that are not in y, with the following result:
+\begin{verbatim}
+[[1]]
+[1] "A"
+
+[[2]]
+[1] "B"
+
+[[3]]
+[1] "C"
+\end{verbatim}
+
+hint:  use setdiff() function
+\subsubsection{Answer}
+\label{sec:orged823ad}
+\begin{verbatim}
+> setdiff(q, y)
+[[1]]
+[1] "A"
+
+[[2]]
+[1] "B"
+
+[[3]]
+[1] "C"
+\end{verbatim}
+\end{document}

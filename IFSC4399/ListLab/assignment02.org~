@@ -1,0 +1,334 @@
+#+TITLE: Assignment01: Matrix Assignment
+#+AUTHOR: Denver Ellis
+#+EMAIL: dsellis@ualr.edu
+#+DATE: <2020-08-31 Mon>
+#+CATEGORY: IFSC 4399: Intro To R
+
+* Vector
+** Exercise 1
+*** Question
+Consider two vectors, a, b
+
+#+begin_src R
+> a <- c(1,5,4,3,6)
+> b <- c(3,5,2,1,9)
+#+end_src
+
+What is the value of: a <= b
+
+*** Answer
+#+begin_src R
+> a <= b
+[1]  TRUE  TRUE FALSE FALSE  TRUE
+#+end_src
+
+** Exercise 2
+*** Question
+Consider two vectors, x, y
+
+#+begin_src R
+> x <- c(12:4)
+> y <- c(0,1,2,0,1,2,0,1,2)
+#+end_src
+
+What is the value of: ~which(!is.finite(x/y))~
+
+*** Answer
+#+begin_src R
+> which(!is.finite(x/y))
+[1] 1 4 7
+#+end_src
+
+** Exercise 3
+*** Question
+#+begin_src R
+> x <- c(1,2,3,4)
+#+end_src
+
+What is the value of k for:
+#+begin_src R
+> (x+2)[(!is.na(x)) & x > 0] -> k
+#+end_src
+
+*** Answer
+~k~ stores the output of the evaluated statement.
+
+** Exercise 4
+*** Question
+If
+#+begin_src R
+> x <- c(2, 4, 6, 8)
+> y <- c(TRUE, TRUE, FALSE, TRUE)
+#+end_src
+
+What is the value of: ~sum(x[y])~
+
+*** Answer
+The value of ~sum(x[y])~ is 14
+
+** Exercise 5
+*** Question
+Consider the vector:
+
+#+begin_src R
+> x <- c(34, 56, 55, 87, NA, 4, 77, NA, 21, NA, 39)
+#+end_src
+
+Which R-statement will count the number of NA values in x?
+
+| a | count(is.na(X))  |
+| b | length(is.na(x)) |
+| c | sum(is.na(x))    |
+| d | count(!is.na(x)) |
+| e | sum(!is.na(x))   |
+
+*** Answer
+The answer is ~c: sum(is.na(x))~
+
+* List
+** Exercise 1
+*** Question
+If:
+#+begin_src R
+> p <- c(2,7,8)
+> q <- c("A", "B", "C")
+> x <- list(p,q)
+#+end_src
+
+Then what is the value of ~x[2]~:
+| a | NULL        |
+| b | "A" "B" "C" |
+| c | "7"         |
+
+*** Answer
+The answer is ~b: "A" "B" "C"~
+
+** Exercise 2
+*** Question
+If:
+#+begin_src R
+> w <- c(2,7,8)
+> v <- c("A", "B", "C")
+> x <- list(w,v)
+#+end_src
+
+Then write an R statement tha will replace "A" in x with "K". The exepected output:
+#+begin_src R
+> x
+[[1]]
+[1] 2 7 8
+
+[[2]]
+[1] "K" "B" "C"
+#+end_src
+
+*** Answer
+#+begin_src R
+> x[[2]] <- c("K", "B", "C")
+> x
+[[1]]
+[1] 2 7 8
+
+[[2]]
+[1] "K" "B" "C"
+#+end_src
+
+** Exercise 3
+*** Question
+If:
+#+begin_src R
+> a <- list ("x"=5, "y"=10, "z"=15)
+#+end_src
+
+Which R statement will give the sum of all elements in a?
+| a | sum(a)         |
+| b | sum(list(a))   |
+| c | sum(unlist(a)) |
+
+*** Answer
+The answer is ~c: sum(unlist(a))~ with a value of 30
+
+** Exercise 4
+*** Question
+If:
+#+begin_src R
+> Newlist <- list(a=1:10, b="Good morning", c="Hi")
+#+end_src
+
+Write an R statement that will add 1 to each element of the first vector in Newlist.  The expected output:
+#+begin_src R
+ > Newlist
+$a
+[1]  2  3  4  5  6  7  8  9 10 11
+
+$b
+[1] "Good morning"
+
+$c
+[1] "Hi"
+#+end_src
+
+*** Answer
+#+begin_src
+> Newlist$a <- Newlist$a + 1
+> Newlist
+$a
+ [1]  2  3  4  5  6  7  8  9 10 11
+
+$b
+[1] "Good morning"
+
+$c
+[1] "Hi"
+#+end_src
+
+** Exercise 5
+*** Question
+If:
+#+begin_src R
+> b <- list(a=1:10, c="Hello", d="AA")
+#+end_src
+
+Write an R expression that will give all elements, except the second, of the first vector of b.  The expected output:
+#+begin_src R
+[1]  1  3  4  5  6  7  8  9 10
+#+end_src
+
+*** Answer
+#+begin_src R
+> which(b$a != b$a[2])
+[1]  1  3  4  5  6  7  8  9 10
+#+end_src
+
+** Exercise 6
+*** Question
+Let
+#+begin_src R
+> x <- list(a=5:10, c="Hello", d="AA")
+#+end_src
+
+Write an R statement to add a new item z = “NewItem” to the list x.  The expected output:
+#+begin_src R
+> x
+$a
+[1]  5  6  7  8  9 10
+
+$c
+[1] "Hello"
+
+$d
+[1] "AA"
+
+$z
+[1] "New Item"
+#+end_src
+
+*** Answer
+#+begin_src R
+> x$z <- "NewItem"
+> x
+$a
+[1]  5  6  7  8  9 10
+
+$c
+[1] "Hello"
+
+$d
+[1] "AA"
+
+$z
+[1] "NewItem"
+#+end_src
+
+** Exercise 7
+*** Question
+Consider
+#+begin_src R
+> y <- list("a", "b", "c")
+#+end_src
+
+Write an R statement that will assign new names ”one”, ”two” and ”three” to the elements of y.  The expected output:
+#+begin_src R
+> y
+$one
+[1] "a"
+
+$two
+[1] "b"
+
+$three
+[1] "c"
+#+end_src
+
+*** Answer
+#+begin_src R
+> names(y) <- c("one", "two", "three")
+> y
+$one
+[1] "a"
+
+$two
+[1] "b"
+
+$three
+[1] "c"
+#+end_src
+
+** Exercise 8
+*** Question
+If
+#+begin_src R
+> x <- list(y=1:10, t="Hello", f="TT", r=5:20)
+#+end_src
+
+Write an R statement that will give the length of vector r of x.  The expected output:
+#+begin_src R
+[1] 16
+#+end_src
+
+*** Answer
+#+begin_src R
+> length(x$r)
+[1] 16
+#+end_src
+
+** Exercise 9 (Bonus)
+*** Question
+Let
+#+begin_src R
+> string <- "Grand Opening"
+#+end_src
+
+Write an R statement to split this string into two and return the following output:
+#+begin_src R
+[[1]]
+[1] "Grand"
+
+[[2]]
+[1] "Opening"
+#+end_src
+
+hint:  use strsplit() function
+*** Answer
+** Exercise 10 (Bonus)
+*** Question
+Let
+#+begin_src R
+> y <- list("a", "b", "c")
+> q <- list("A", "B", "C", "a", "b", "c").
+#+end_src
+
+Write an R statement that will return all elements of q that are not in y, with the following result:
+#+begin_src R
+[[1]]
+[1] "A"
+
+[[2]]
+[1] "B"
+
+[[3]]
+[1] "C"
+#+end_src
+
+hint:  use setdiff() function
+*** Answer
