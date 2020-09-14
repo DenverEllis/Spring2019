@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO. We can say that every screen we might have in our app will be an Activity in our code-->
+<!-- TODO. For each activity we want have in the app we need to create a layout xml file and the corresponding java file with the logic-->
+<!-- TODO 10. Layout definition: We can directly type the code or use the Layout Editor that Android Studio provides -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="18dp"
+        android:background="#37009688"
+        android:orientation="vertical"
+        android:padding="18dp"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="18dp">
+
+        <!-- TODO 11. If any of the included elements needs to be accessed from the Java code we need to define its id -->
+        <!-- TODO 12. Besides, for any kind of element defining both its width and height is mandatory -->
+        <TextView
+            android:id="@+id/userMsgTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/default_msg"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#009688"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/userInputET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:hint="@string/write_msg_hint"
+            android:inputType="text" />
+
+        <!-- TODO 16. We bind the method we defined in the Activity class with the desired GUI element
+                      defined in the layout xml file -->
+        <Button
+            android:id="@+id/showBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="#E91E63"
+            android:fontFamily="sans-serif-black"
+            android:onClick="showTextMessage"
+            android:text="show text"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

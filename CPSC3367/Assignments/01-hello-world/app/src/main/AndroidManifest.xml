@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO. We use the AndroidManifest file to define app's general properties and components -->
+<!-- TODO 01. Change the package name (name of the folder under the java folder). Update package value of the manifest element -->
+<!-- TODO 02. Modify android:label property of the application element to set the app name-->
+<!-- TODO 03. Note the app name is not hardcoded. We use a string resource instead. WHAT ARE RESOURCES? -->
+<!-- TODO 04. We define the app launcher icon by setting an image for the icon and roundIcon elements -->
+<!-- TODO 05. Adaptative (modern) icons  VS Legacy icons (API level < 25) -->
+<!-- TODO 06. Using Image Asset Studio to create a new launcher icon -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ualr.helloworld">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
