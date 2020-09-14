@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hello World</string>
+    <string name="app_name">First App</string>
     <string name="default_msg">Mobile Apps Development at UALR</string>
     <string name="write_msg_hint">Write the message</string>
     <string name="show_btn">show message</string>

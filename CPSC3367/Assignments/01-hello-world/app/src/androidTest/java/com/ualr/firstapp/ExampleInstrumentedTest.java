@@ -1,4 +1,4 @@
-package com.ualr.helloworld;
+package com.ualr.firstapp;
 
 import android.content.Context;
 

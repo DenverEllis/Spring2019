@@ -7,7 +7,7 @@
 <!-- TODO 05. Adaptative (modern) icons  VS Legacy icons (API level < 25) -->
 <!-- TODO 06. Using Image Asset Studio to create a new launcher icon -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ualr.helloworld">
+    package="com.ualr.firstapp">
 
     <application
         android:allowBackup="true"
