@@ -7,7 +7,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.ualr.myfirstapp" // TODO 07. Identifies the app on the device and in the Play Store
-        minSdkVersion 20                    // TODO 08. Lowest compatible API level
+        minSdkVersion 14                    // TODO 08. Lowest compatible API level
         targetSdkVersion 29                 // TODO 09. Highest targeted API level
         versionCode 1
         versionName "1.0"
