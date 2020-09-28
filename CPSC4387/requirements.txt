@@ -1,0 +1,10 @@
+google.cloud
+google-api-core
+google-cloud-storage
+google-cloud-datastore
+google-api-python-client
+google-cloud-pubsub
+google-cloud-runtimeconfig
+oauth2client
+google~=3.0.0
+Flask~=1.1.2

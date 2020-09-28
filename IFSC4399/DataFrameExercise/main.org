@@ -1,0 +1,149 @@
+#+TITLE: Data frame
+#+AUTHOR: Denver Ellis
+
+* Exercise 1
+For this exercise, use the (built-in) dataset VADeaths.
+** Make sure the object is a data frame, if not change it to a data frame.
+#+BEGIN_SRC R
+> class(VADeaths)
+[1] "matrix"
+> df = as.data.frame(VADeaths)
+#+END_SRC
+
+** Create a new variable, named Total, which is the sum of each row.
+#+BEGIN_SRC R
+> total <- rowSums(df)
+> df
+#+END_SRC
+
+** Change the order of the columns so total is the first variable.
+#+BEGIN_SRC R
+> df = cbind(Total = total, df)
+> df
+#+END_SRC
+
+* Exercise 2
+For this exercise, use the (built-in) dataset state.x77.
+** Make sure the object is a data frame, if not change it to a data frame.
+#+BEGIN_SRC R
+> class(state.x77)
+[1] "matrix"
+> df = as.data.frame(state.x77)
+#+END_SRC
+
+** Find out how many states have an income of less than 4300.
+#+BEGIN_SRC R
+> nrow(df[(df$Income < 4300),])
+[1] 20
+#+END_SRC
+
+** Find out which is the state with the highest income.
+#+BEGIN_SRC R
+> which.max(df$Income)
+[1] 2
+> states <- rownames(df)
+> states[2]
+[1] "Alaska"
+> states[which.max(df$Income)]
+[1] "Alaska"
+#+END_SRC
+
+* Exercise 3
+With the built-in dataset swiss, create a data frame of only the rows 1, 2, 3, 10, 11, 12 and 13, and only the
+variables Examination, Education and Infant.Mortality.
+#+BEGIN_SRC R
+> class(swiss)
+class(swiss)
+[1] "data.frame"
+> df = swiss[c(1:3, 10:13), c("Examination","Education", "Infant.Mortality")]
+> df
+             Examination Education Infant.Mortality
+Courtelary            15        12             22.2
+Delemont               6         9             22.2
+Franches-Mnt           5         5             20.2
+Sarine                16        13             24.4
+Veveyse               14         6             24.5
+Aigle                 21        12             16.5
+Aubonne               14         7             19.1
+#+END_SRC
+
+** The infant mortality of Sarine is wrong, it should be a NA, change it.
+#+BEGIN_SRC R
+> df["Sarine", "Infant.Mortality"] = NA
+> df
+             Examination Education Infant.Mortality
+Courtelary            15        12             22.2
+Delemont               6         9             22.2
+Franches-Mnt           5         5             20.2
+Sarine                16        13               NA
+Veveyse               14         6             24.5
+Aigle                 21        12             16.5
+Aubonne               14         7             19.1
+#+END_SRC
+
+** Create a row that will be the total sum of the column, name it Total.
+#+BEGIN_SRC R
+> df["Total",] <- colSums (df, na.rm = TRUE)
+> df
+             Examination Education Infant.Mortality
+Courtelary            15        12             22.2
+Delemont               6         9             22.2
+Franches-Mnt           5         5             20.2
+Sarine                16        13               NA
+Veveyse               14         6             24.5
+Aigle                 21        12             16.5
+Aubonne               14         7             19.1
+Total                 91        64            124.7
+#+END_SRC
+
+** Create a new variable that will be the proportion of Examination (Examination / Total)
+#+BEGIN_SRC R
+> Proportion = df$Examination / df["Total", "Examination"]
+> Proportion
+[1] 0.16483516 0.06593407 0.05494505 0.17582418 0.15384615 0.23076923 0.15384615
+[8] 1.00000000
+#+END_SRC
+
+* Exercise 4
+** Create a data frame with the datasets state.abb, state.area, state.division, state.name, state.region. The row names should be the names of the states.
+#+BEGIN_SRC R
+> df <- data.frame(state.abb, state.area, state.division, state.region, row.names = state.name)
+> df
+#+END_SRC
+
+** Then add the resulting data frame from (a) column-wise to state.x77
+#+BEGIN_SRC R
+> df <- cbind(state.x77, df)
+#+END_SRC
+
+** Remove the variable state.division.
+#+BEGIN_SRC R
+> df$state.division <- NULL
+> df
+#+END_SRC
+
+** Also remove the variables Life Exp, HS Grad, Frost, state.abb, and state.area.
+#+BEGIN_SRC R
+> colnames(df)
+> df[10] <- NULL; df[9] <- NULL; df[7] <- NULL; df[6] <- NULL; df[4] <- NULL
+> df
+#+END_SRC
+
+** Add a variable to the data frame which should categorize the level of illiteracy: [0,1) is low, [1,2) is some, [2, inf) is high. (hint: use cut() or nested ifelse())
+#+BEGIN_SRC R
+> df$IlliteracyLevel <- ifelse(df$Illiteracy < 1,
++                              "Low Illiteracy",
++                              ifelse(df$Illiteracy >= 1 & df$Illiteracy < 2,
++                                     "Some Illiteracy",
++                                     ifelse(df$Illiteracy >= 2,
++                                            "High Illiteracy",
++                                            "N/A")))
+> df$IlliteracyLevel
+#+END_SRC
+
+** Find out which state from the west, with low illiteracy, has the highest income, and what that income is
+#+BEGIN_SRC R
+> sub <- subset(df, IlliteracyLevel == "Low Illiteracy" & state.region == "West")
+> row.names(sub)[which (sub$Income == max(sub$Income))]
+[1] "Nevada"
+#+END_SRC

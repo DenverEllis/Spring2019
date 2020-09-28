@@ -122,7 +122,7 @@
 		   (cadadr chromosome)
 		   (car (cddadr chromosome)))
 	 (route-distance (cdr chromosome)))
-     (cadar chromosome)))
+      (cadar chromosome)))
 
 (defun mutate-gene (gene chromosome)
   "Mutate a gene by swapping the positions of a random city with another random city"
