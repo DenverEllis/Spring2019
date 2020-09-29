@@ -4,50 +4,51 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:paddingLeft="16dp"
-    android:paddingTop="16dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="16dp"
-    tools:context=".MainActivity" >
-
-    <TextView
-        android:id="@+id/taskList"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="@string/task_list_empty"
-        android:gravity="center_vertical"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        tools:context=".MainActivity" >
 
-    <EditText
-        android:backgroundTint="@color/colorAccent"
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/task_placeholder"
-        app:layout_constraintEnd_toStartOf="@+id/add_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/taskList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="@string/task_list_empty"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
-    <ImageView
-        android:id="@+id/add_btn"
-        android:tint="@color/colorPrimary"
-        android:src="@drawable/ic_baseline_add_circle_24"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
+        <EditText
+            android:backgroundTint="@color/colorAccent"
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/task_placeholder"
+            app:layout_constraintEnd_toStartOf="@+id/add_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/add_btn"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:onClick="onAddBtnClicked"
+            android:src="@drawable/ic_baseline_add_circle_24"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:elevation="12dp"
@@ -74,26 +75,28 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            app:cornerRadius="24dp"
-            android:text="@string/delete_task"
-            android:textColor="@android:color/white"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:id="@+id/deleteBtn"
-            android:layout_marginRight="8dp"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:onClick="onDeleteBtnClicked"
+            android:text="@string/delete_task"
+            android:textColor="@android:color/white"
+            app:cornerRadius="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/editTextTaskId"
             app:layout_constraintEnd_toStartOf="@+id/clearBtn" />
 
         <com.google.android.material.button.MaterialButton
-            app:cornerRadius="24dp"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:text="@string/done_task"
-            android:textColor="@android:color/white"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:id="@+id/clearBtn"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:onClick="onDoneBtnClicked"
+            android:text="@string/done_task"
+            android:textColor="@android:color/white"
+            app:cornerRadius="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/editTextTaskId"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

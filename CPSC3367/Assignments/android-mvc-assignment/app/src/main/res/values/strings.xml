@@ -5,4 +5,5 @@
     <string name="delete_task">Delete</string>
     <string name="done_task">Done</string>
     <string name="insert_task_id">Type id of task to be deleted</string>
+    <string name="add_task">Add</string>
 </resources>
