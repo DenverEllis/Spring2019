@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SimpleTaskList</string>
+    <string name="task_placeholder">Type task description here</string>
+    <string name="task_list_empty">The task list is empty</string>
+    <string name="delete_task">Delete</string>
+    <string name="done_task">Done</string>
+    <string name="insert_task_id">Type id of task to be deleted</string>
+</resources>
