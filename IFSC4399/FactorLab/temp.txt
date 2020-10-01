@@ -1,0 +1,7 @@
+The advantages of object orientation can be explained by example. Consider
+statistical regression. When you perform a regression analysis with
+other statistical packages, such as SAS or SPSS, you get a mountain of output
+on the screen. By contrast, if you call the lm() regression function in
+R, the function returns an object containing all the resultsâ€”the estimated
+coefficients, their standard errors, residuals, and so on. You then pick and
+choose, programmatically, which parts of that object to extract.

@@ -1,0 +1,205 @@
+* Exercise 1
+** Question:
+If ~x=c(1,2,3,3,5,3,2,4, NA)~, what are the levels of ~factor(x)~?
+
+a.  1, 2, 3, 4, 5
+b.  NA
+c.  1, 2, 3, 4, 5, NA
+** Answer:
+#+begin_src R
+> factor(x)
+[1] 1    2    3    3    5    3    2    4    <NA>
+Levels: 1 2 3 4 5
+#+end_src
+
+The answer is A: 1, 2, 3, 4, 5
+
+* Exercise 2
+** Question:
+Let ~x = c(11, 22, 47, 47, 11, 47, 11)~. If an R expression:
+
+#+begin_src R
+factor(x, levels=c(11, 22, 47), ordered=TRUE)
+#+end_src
+
+is executed, what will be the 4th element in the output?
+
+a. 11
+b. 22
+c. 47
+
+** Answer:
+#+begin_src R
+> factor(x, levels=c(11, 22, 47), ordered=TRUE)
+[1] 11 22 47 47 11 47 11
+Levels: 11 < 22 < 47
+#+end_src
+
+The answer is C: 47
+
+* Exercise 3
+** Question:
+If
+
+#+begin_src R
+> z <- c("p", "a" , "g", "t", "b")
+#+end_src
+
+then which of the following R expressions will replace the third element in z with ”b”.
+
+a. f actor(z[3]) = “b”
+b. levels(z[3]) = “b”
+c. z[3] = “b”
+
+** Answer:
+#+begin_src R
+> z <- c("p", "a" , "g", "t", "b")
+> z[3]
+[1] "g"
+> z[3] = "b"
+> z
+[1] "p" "a" "b" "t" "b"
+#+end_src
+
+The answer is C: ~z[3] = "b"~
+
+* Exercise 4
+** Question:
+If
+
+#+begin_src R
+x = factor(c("high", "low", "medium", "high", "high", "low", "medium"))
+#+end_src
+
+write an R expression that will provide unique numeric values for various levels of x with the following output:
+#+begin_output
+   levels  value
+1   high   1
+2    low   2
+3 medium   3
+#+end_output
+
+** Answer:
+I at first tried this:
+#+begin_src R
+> data.frame(levels(x), c(1, 2, 3))
+  levels.x. c.1..2..3.
+1      high          1
+2       low          2
+3    medium          3
+#+end_src
+
+Which seems close, but I was not sure how strict you would be with the formatting. To correct ~levels.x~ to ~levels~ and ~c.1..2..3~ to ~value~ I used keyword arguments ~levels~ and ~value~. Here is a correct expression:
+
+#+begin_src R
+> data.frame(levels = levels(x), value = c(1, 2, 3))
+  levels value
+1   high     1
+2    low     2
+3 medium     3
+#+end_src
+* Exercise 5
+** Question:
+Consider the factor
+
+#+begin_src R
+> responses <- factor(c("Agree", "Agree", "Strongly Agree", "Disagree", "Agree"))
+> responses
+[1] Agree Agree Strongly Agree Disagree Agree
+Levels: Agree Disagree Strongly Agree
+#+end_src
+
+Later it was found that new a level ”Strongly Disagree” exists. Write an R expression that will include
+”strongly disagree” as new level attribute of the factor and returns the following output:
+
+#+begin_src R
+[1] Agree Agree Strongly Agree Disagree Agree
+Levels: Strongly Agree Agree Disagree Strongly Disagree
+#+end_src
+** Answer:
+#+begin_src R
+> factor(responses, levels=c("Strongly Agree", "Agree", "Disagree", "Strongly Disagree"))
+[1] Agree          Agree          Strongly Agree Disagree       Agree
+Levels: Strongly Agree Agree Disagree Strongly Disagree
+#+end_src
+* Exercise 6
+** Question:
+Download a text file called “About R.txt” from Blackboard. Read the text file and determine which words were
+in the text, and then output a list giving the words and their locations within the text.
+hint: Use scan(file = “About R.txt”, what =“”) to read the file in then use split()
+
+The expected output is:
+#+begin_src R
+> findwords("About R.txt")
+Read 79 items
+[... Too much to print on page]
+#+end_src
+
+** Answer:
+To start, I renamed the file "About R.txt" to "temp.txt". To do accomplish this task normally, we only need two functions: scan and split. I initially split the data improperly and received the following warning and result:
+#+begin_src R
+data = scan(file = "temp.txt", what = "")
+words = split(length(text), text)
+Warning message:
+In split.default(length(text), text) :
+  data length is not a multiple of split variable
+> words
+$a
+integer(0)
+[...]
+#+end_src
+
+I then ammended the use of the function split to use an iterator for the first functions:
+#+begin_src R
+> text = scan(file = "temp.txt", what="")
+Read 79 items
+> words = split(1:length(text), text)
+> words
+$a
+[1] 17 31
+[...]
+#+end_src
+
+We can actually combine these into two functions into a one liner which cool but not as memory efficient:
+#+begin_src R
+> words = split(1:length(scan(file = "temp.txt", what="")), scan(file = "temp.txt", what=""))
+Read 79 items
+Read 79 items
+> words
+$a
+[1] 17 31
+#+end_src
+
+However, depending on solution strictness, this is may still not be an acceptable solution. Upon searching, there is not a ~findwords~ function, so we must make it to match the expected output. We can almost copy and paste our previously used functions into the created function. (NOTE: We are not using the one liner as this is poor for memory scaling):
+#+begin_src R
+> findwords()
+Error in findwords() : could not find function "findwords"
+> findwords = function(file) {
++ text = scan(file = file, what="")
++ words = split(1:length(text), text)
++ return(words)
++ }
+> findwords("temp.txt")
+Read 79 items
+$a
+[1] 17 31
+[...]
+#+end_src
+* Exercise 7
+** Question:
+*** A) What are column names of iris dataset (2pts)
+#+begin_src R
+> colnames(iris)
+[1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width"  "Species"
+#+end_src
+*** B) Calculate the mean of sepal length, sepal width, petal.length, petal width of different type of iris. (10pts)
+#+begin_src R
+> aggregate(iris[,-5], iris$Species, mean)
+Error in aggregate.data.frame(iris[, -5], iris$Species, mean) :
+  'by' must be a list
+> aggregate(iris[-5], list(iris$Species), mean)
+     Group.1 Sepal.Length Sepal.Width Petal.Length Petal.Width
+1     setosa        5.006       3.428        1.462       0.246
+2 versicolor        5.936       2.770        4.260       1.326
+3  virginica        6.588       2.974        5.552       2.026
+#+end_src

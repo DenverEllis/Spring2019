@@ -1,0 +1,91 @@
+* Loops
+** Exercise 1
+*** Question
+Create the data frame called, student.df, with the data provided below:
+#+begin_src R
+> student.df = data.frame( name = c("Sue", "Eva", "Henry", "Jan"),
+                      sex = c("f", "f", "m", "m"),
+                      years = c(21,31,29,19))
+#+end_src
+
+Use an ifelse statement to add a new column called, male.teen, to the data frame. This is a boolean column, T if the observation is a male younger than 20 years other is F.
+
+*** Answer
+#+begin_src R
+> student.df
+   name sex years
+1   Sue   f    21
+2   Eva   f    31
+3 Henry   m    29
+4   Jan   m    19
+> boolBuff = ifelse(student.df$sex == "m" & student.df$years < 20,
++ "T",
++ "F")
+> boolBuff
+[1] "F" "F" "F" "T"
+> student.df$male.teen = boolBuff
+> student.df
+   name sex years male.teen
+1   Sue   f    21         F
+2   Eva   f    31         F
+3 Henry   m    29         F
+4   Jan   m    19         T
+#+end_src
+
+** Exercise 2
+*** Question
+Write a repeat loop containing three random numbers. The loop repeats itself exactly ten times before it stops.
+
+hint: use rnorm() to generate random numbers.
+
+*** Answer
+
+** Exercise 3
+Write a for loop that prints the Displacement (disp) of the mtcars dataset.
+*** This loop will only print observations of 160 or higher in “disp”.
+*** This loop will stop as soon as an observation is smaller than 160 in disp.
+
+** Exercise 4
+*** Question
+Adding a new column to a data.frame
+You have the data.frame mydf with four columns like below.
+#+begin_src R
+a <- c(3,7,NA, 9)
+b <- c(2,NA,9,3)
+f <- c(5,2,5,6)
+d <- c(NA,3,4,NA)
+mydf <- data.frame(a=a,b=b,f=f,d=d)
+#+end_src
+
+You want to add another column 5:
+- the 5th column contains the value of col 2 if col 1 is NA;
+- the 5th column contains the value of col 4 if col 2 is NA;
+- the 5th column contains the value of col 3 in all other cases.
+
+*** Answer
+
+** Exercise 5
+*** Question
+Write a while loop starting with x = 0. The loop prints all numbers up to 30 and it skips whole vector of
+numbers: 3,9,13,19,23,29.
+
+*** Answer
+
+** Exercise 6 (Bonus)
+*** Question
+Use a nested for loop (a for loop inside a for loop) that produces the following matrix, preallocate the matrix with NA values.
+
+hint:
+- Use a R constant NA integer to preallocate the matrix
+- Each element in the matrix can be obtained
+
+#+begin_src R
+mat[i, j] <- abs(i - j)
+#+end_src
+*** Answer
+
+* Function
+** Exercise 1
+** Exercise 2
+** Exercise 3
+** Exercise 4
