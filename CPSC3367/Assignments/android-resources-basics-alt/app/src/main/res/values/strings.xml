@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Geography Lesson</string>
+    <string name="lesson_learnt_label" translatable="false">lesson learnt</string>
+    <string name="congrats_text" translatable="false">Congratulations. Now, enjoy your free time.</string>
+    <string name="Country_Title">United States of America</string>
+    <string name="country_description">Country description</string>
+</resources>

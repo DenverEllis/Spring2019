@@ -1,0 +1,10 @@
+<resources>
+    <dimen name="padding">24dp</dimen>
+    <dimen name="width">128dp</dimen>
+    <dimen name="height">0dp</dimen>
+    <dimen name="titleTextSize">20sp</dimen>
+    <dimen name="longTextSize">16sp</dimen>
+    <dimen name="lineHeight">24dp</dimen>
+    <dimen name="marginBottomIV">12dp</dimen>
+    <dimen name="marginBottomTV">24dp</dimen>
+</resources>
