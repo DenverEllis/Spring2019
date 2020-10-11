@@ -7,4 +7,5 @@
     <dimen name="lineHeight">24dp</dimen>
     <dimen name="marginBottomIV">12dp</dimen>
     <dimen name="marginBottomTV">24dp</dimen>
+    <dimen name="marginLandIV">16dp</dimen>
 </resources>
