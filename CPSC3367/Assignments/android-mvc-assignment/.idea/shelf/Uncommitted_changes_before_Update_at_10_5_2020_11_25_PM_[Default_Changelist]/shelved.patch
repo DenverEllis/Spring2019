@@ -1,0 +1,123 @@
+Index: ../../../CPSC4387/helloworld/templates/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Pub Sub Test</title>\r\n</head>\r\n<body>\r\n      <form action = \"https://helloworld-76gmo6swua-uc.a.run.app/publish\" method = \"post\">\r\n         <p><input type = \"test\" name = \"test\" /></p>\r\n         <p><input type = \"submit\" value = \"submit\" /></p>\r\n      </form>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../../../CPSC4387/helloworld/templates/index.html	(revision 76fe68ee7f51ba0455e6f3cbb0673708a1da49fe)
++++ ../../../CPSC4387/helloworld/templates/index.html	(date 1601700413750)
+@@ -6,8 +6,9 @@
+ </head>
+ <body>
+       <form action = "https://helloworld-76gmo6swua-uc.a.run.app/publish" method = "post">
+-         <p><input type = "test" name = "test" /></p>
+-         <p><input type = "submit" value = "submit" /></p>
++          <!--p><input type = "test" name = "test" /></p-->
++          <p><input type = "submit" value = "instance" /></p>
++          <p><input type = "submit" value = "bucket" /></p>
+       </form>
+ </body>
+ </html>
+\ No newline at end of file
+Index: ../../../CPSC4387/helloworld/templates/base.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../../../CPSC4387/helloworld/templates/base.html	(date 1601697551337)
++++ ../../../CPSC4387/helloworld/templates/base.html	(date 1601697551337)
+@@ -0,0 +1,25 @@
++<html lang="en">
++<head>
++    {%block head_block %}
++    <meta charset="utf-8" />
++    <meta name="viewport" content="width=device-width, initial-scale=1" />
++
++    <title>{% block title %}Sample Flask App{% endblock title %}</title>
++
++    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
++    {% endblock head_block %}
++</head>
++
++<body class="body">
++    <div class="main-content">
++        {% block content %}
++        <form class="border border-light p-5">
++            <button class="btn btn-info btn-block my-4" type="submit" formmethod="post">Sample Button</button>
++        </form>
++        {% endblock %}
++    </div>
++
++    {% block js_block %}{% endblock js_block %}
++
++</body>
++</html>
+\ No newline at end of file
+Index: ../../../CPSC4387/requirements.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>google.cloud\r\ngoogle-api-core\r\ngoogle-cloud-storage\r\ngoogle-cloud-datastore\r\ngoogle-api-python-client\r\ngoogle-cloud-pubsub\r\ngoogle-cloud-runtimeconfig\r\noauth2client\r\ngoogle~=3.0.0\r\nFlask~=1.1.2
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../../../CPSC4387/requirements.txt	(revision 76fe68ee7f51ba0455e6f3cbb0673708a1da49fe)
++++ ../../../CPSC4387/requirements.txt	(date 1601699386547)
+@@ -2,9 +2,9 @@
+ google-api-core
+ google-cloud-storage
+ google-cloud-datastore
+-google-api-python-client
++google-api-python-client~=1.12.2
+ google-cloud-pubsub
+ google-cloud-runtimeconfig
+-oauth2client
++oauth2client~=4.1.3
+ google~=3.0.0
+ Flask~=1.1.2
+\ No newline at end of file
+Index: ../../../CPSC4387/helloworld/templates/publish.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html>\r\n   <body>\r\n      <form action = \"https://helloworld-76gmo6swua-uc.a.run.app/publish\" method = \"post\">\r\n         <p><input type = \"test\" name = \"test\" /></p>\r\n         <p><input type = \"submit\" value = \"submit\" /></p>\r\n      </form>\r\n   </body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../../../CPSC4387/helloworld/templates/publish.html	(revision 76fe68ee7f51ba0455e6f3cbb0673708a1da49fe)
++++ ../../../CPSC4387/helloworld/templates/publish.html	(date 1601700735515)
+@@ -2,8 +2,8 @@
+ <html>
+    <body>
+       <form action = "https://helloworld-76gmo6swua-uc.a.run.app/publish" method = "post">
+-         <p><input type = "test" name = "test" /></p>
+-         <p><input type = "submit" value = "submit" /></p>
++         <p><input type = "submit" name = "operation" value = "instance"/></p>
++         <p><input type = "submit" name = "operation" value = "bucket"/></p>
+       </form>
+    </body>
+ </html>
+\ No newline at end of file
+Index: ../../../CPSC4387/helloworld/main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import os\r\nimport time\r\n\r\nfrom flask import Flask, redirect, url_for, request, render_template\r\nfrom google.cloud import pubsub_v1\r\n\r\napp = Flask(__name__)\r\n\r\nproject_id = \"distributedcomputing-290417\"\r\ntopic_id = \"compute-and-storage-test\"\r\n\r\npublisher = pubsub_v1.PublisherClient()\r\ntopic_path = publisher.topic_path(project_id, topic_id)\r\n\r\nfutures = dict()\r\n\r\n\r\ndef get_callback(f, data):\r\n    def callback(f):\r\n        try:\r\n            print(f.result())\r\n            futures.pop(data)\r\n        except:  # noqa\r\n            print(\"Please handle {} for {}.\".format(f.exception(), data))\r\n\r\n    return callback\r\n\r\n\r\n@app.route('/')\r\ndef hello_world():\r\n    name = os.environ.get('NAME', 'World')\r\n    return render_template('index.html')\r\n\r\n\r\n@app.route('/publish', methods=['POST', 'GET'])\r\ndef publish():\r\n    if request.method == 'POST':\r\n        data = str(request.form['test'])\r\n        futures.update({data: None})\r\n        future = publisher.publish(topic_path, data.encode(\"utf-8\"))\r\n        futures[data] = future\r\n        future.add_done_callback(get_callback(future, data))\r\n        string = request.form['test']\r\n        while futures:\r\n            time.sleep(1)\r\n        return redirect(url_for('success', message=string))\r\n    else:\r\n        string = request.args.get('test')\r\n        return redirect(url_for('success', message=string))\r\n\r\n\r\n@app.route('/success/<message>')\r\ndef success(message):\r\n    return 'You typed %s' % message\r\n\r\n\r\nif __name__ == \"__main__\":\r\n    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../../../CPSC4387/helloworld/main.py	(revision 76fe68ee7f51ba0455e6f3cbb0673708a1da49fe)
++++ ../../../CPSC4387/helloworld/main.py	(date 1601701747164)
+@@ -40,12 +40,12 @@
+         future = publisher.publish(topic_path, data.encode("utf-8"))
+         futures[data] = future
+         future.add_done_callback(get_callback(future, data))
+-        string = request.form['test']
++        string = request.form['operation']
+         while futures:
+             time.sleep(1)
+         return redirect(url_for('success', message=string))
+     else:
+-        string = request.args.get('test')
++        string = request.args.get('operation')
+         return redirect(url_for('success', message=string))
+ 
+ 
